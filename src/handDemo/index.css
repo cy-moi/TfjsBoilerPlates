@@ -1,5 +1,6 @@
 .video {
-  /* visibility: hidden; */
+  visibility: hidden;
+  position: absolute;
 }
 
 .output {

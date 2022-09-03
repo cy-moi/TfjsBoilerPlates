@@ -20,7 +20,11 @@ module.exports = {
             singleton: true
           }
         }]
-      }
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
     ]
   },
   output: {

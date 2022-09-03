@@ -1,6 +1,5 @@
 
 const path = require('path');
-const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const entriesMap = require('./entriesMap')
 
@@ -33,9 +32,6 @@ const getHtmlWebpackPlugins = ({ isDev }) => (
   entries.map((e) => new HtmlWebpackPlugin({
     filename: `${e}.html`,
     template: path.resolve(__dirname, `${entriesMap[e]}.html`),
-    // templateParameters: {
-    //   publicUrl: isDev ? '' : `/${getUrlPublic()}`,
-    // },
     excludeChunks: entries.filter(it => (it !== e)),
   }))
 )

@@ -1,25 +1,10 @@
 import * as Comlink from 'comlink';
 import { init, estimateHands } from '../worker/handpose.worker';
+import './index.css';
 
-const VIDEO_WIDTH = 640;
-const VIDEO_HEIGHT = 500;
 const mobile = isMobile();
 
 let ctx;
-let model;
-var cw = 300,
-    ch = 300,
-    parts = [],
-    partCount = 200,
-    partsFull = false,
-    hueRange = 50,
-    globalTick = 0,
-    rand = function(min, max){
-        return Math.floor( (Math.random() * (max - min + 1) ) + min);
-    };
-
-let results = [];
-
 
 mainWorker()
 // mainAlt()
@@ -27,8 +12,7 @@ async function mainWorker() {
   const video = await setupCamera();
   const videoWidth = video.videoWidth;
   const videoHeight = video.videoHeight;
-  cw = video.videoWidth;
-  ch = video.videoHeight
+
   console.log(`${videoWidth} x ${videoHeight}`);
 
   await init()
@@ -104,8 +88,8 @@ async function setupCamera() {
       facingMode: 'user',
       // Only setting the video to a specified size in order to accommodate a
       // point cloud, so on mobile devices accept the default size.
-      width: mobile ? undefined : VIDEO_WIDTH,
-      height: mobile ? undefined : VIDEO_HEIGHT
+      // width: mobile ? undefined : VIDEO_WIDTH,
+      // height: mobile ? undefined : VIDEO_HEIGHT
     },
   });
   video.srcObject = stream;

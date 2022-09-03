@@ -1,0 +1,38 @@
+{
+  "name": "tfjs-classify",
+  "version": "1.0.0",
+  "description": "use tfjs to classify space objects in scifi",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open --config webpack.config.js --hot",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/cy-moi/tfjs-classifier-boilerplate.git"
+  },
+  "author": "zcy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cy-moi/tfjs-classifier-boilerplate/issues"
+  },
+  "homepage": "https://github.com/cy-moi/tfjs-classifier-boilerplate#readme",
+  "dependencies": {
+    "@mediapipe/hands": "^0.4.1646424915",
+    "@tensorflow-models/hand-pose-detection": "^2.0.0",
+    "@tensorflow/tfjs": "^3.20.0",
+    "@tensorflow/tfjs-backend-webgl": "^3.20.0",
+    "@tensorflow/tfjs-core": "^3.20.0",
+    "comlink": "^4.3.1",
+    "html-webpack-plugin": "^5.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.18.10",
+    "comlink-loader": "^2.0.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.0"
+  }
+}

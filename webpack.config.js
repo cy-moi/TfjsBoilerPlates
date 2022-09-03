@@ -1,8 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {
+  getEntries,
+  getHtmlWebpackPlugins,
+  getApiFallbackRewrites
+} = require('./webpack.utils');
+
 module.exports = {
   mode: 'development',
-  entry: "./src/handDemo/index.js",
+  entry: getEntries(),
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -33,11 +39,12 @@ module.exports = {
       directory: path.join(__dirname, 'public'),
     },
     compress: true,
-    port: 9000
+    port: 9000,
+    historyApiFallback: {
+      rewrites: getApiFallbackRewrites(),
+    },
   },
   plugins:[
-    new HtmlWebpackPlugin({
-      template: './src/handDemo/index.html'
-    })
+    ...getHtmlWebpackPlugins({isDev: true})
   ]
 }

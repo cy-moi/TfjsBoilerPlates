@@ -12,14 +12,14 @@ import SketchExample from './sketchPicher'
 // TODO:
 // 1. 加选色功能
 // 2. 加清除功能
-var codeToInject = 'Object.defineProperty(navigator,"platform", { \
-  get: function () { return "iPad"; }, \
-  set: function (a) {} \
- });';
-var script = document.createElement('script');
-script.appendChild(document.createTextNode(codeToInject));
-(document.head || document.documentElement).appendChild(script);
-script.parentNode.removeChild(script);
+// var codeToInject = 'Object.defineProperty(navigator,"platform", { \
+//   get: function () { return "iPad"; }, \
+//   set: function (a) {} \
+//  });';
+// var script = document.createElement('script');
+// script.appendChild(document.createTextNode(codeToInject));
+// (document.head || document.documentElement).appendChild(script);
+// script.parentNode.removeChild(script);
 
 const VIDEO_WIDTH = 640;
 const VIDEO_HEIGHT = 480;

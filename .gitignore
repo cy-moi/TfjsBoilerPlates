@@ -1,7 +1,12 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+!node_modules/
+node_modules/*
+!node_modules/@mediapipe/
+node_modules/@mediapipe/*
+!node_modules/@mediapipe/face_mesh
+
 
 /.vscode
 .vscode

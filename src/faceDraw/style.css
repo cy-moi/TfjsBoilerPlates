@@ -11,6 +11,10 @@ body {
     /* cursor: none; */
     font-family: PingFang SC;
 }
+.content{
+    visibility: visible !important;
+    display: block !important;
+}
 
 h1 {
     font-family: "PingFang SC";

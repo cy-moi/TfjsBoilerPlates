@@ -1,4 +1,4 @@
-// import { init, estimateFaces } from '../worker/facelandmarks.worker';
+import './style.css';
 import * as Comlink from 'comlink';
 import * as utils from './utils';
 // import FaceLandmarkWorker from '../worker/facelandmarks.worker';
@@ -6,20 +6,7 @@ import * as utils from './utils';
 // import { Button } from 'Src/components/Button'
 import React from 'react';
 import { render } from 'react-dom';
-import  './style.css'
-import SketchExample from './sketchPicher'
-
-// TODO:
-// 1. 加选色功能
-// 2. 加清除功能
-// var codeToInject = 'Object.defineProperty(navigator,"platform", { \
-//   get: function () { return "iPad"; }, \
-//   set: function (a) {} \
-//  });';
-// var script = document.createElement('script');
-// script.appendChild(document.createTextNode(codeToInject));
-// (document.head || document.documentElement).appendChild(script);
-// script.parentNode.removeChild(script);
+import SketchExample from './sketchPicher';
 
 const VIDEO_WIDTH = 640;
 const VIDEO_HEIGHT = 480;

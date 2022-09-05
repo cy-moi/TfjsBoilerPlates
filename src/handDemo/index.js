@@ -1,7 +1,7 @@
 import * as Comlink from 'comlink';
 import { init, estimateHands } from '../models/handpose';
 import { drawPoint, isMobile, setupCamera } from './utils';
-import './index.css';
+// import './index.css';
 
 const mobile = isMobile();
 

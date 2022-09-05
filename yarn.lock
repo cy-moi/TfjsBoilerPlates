@@ -1063,6 +1063,13 @@
   resolved "https://registry.npmmirror.com/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.3.tgz#323d72dd25103d0c4fbdce89dadf574a787b1f9b"
   integrity sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ==
 
+"@tensorflow-models/face-detection@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/@tensorflow-models/face-detection/-/face-detection-1.0.1.tgz#f0b68f5c8ebf38d588ae2c9c6eb7517e7faad2b5"
+  integrity sha512-oIEEqHy4qbkGn5xT1ldzwxK5s948+t7ts0+WoIfTPKwScpNa8YY4GJf+fpyhtOxUGGAZymXx25jrvF9YlAt9dg==
+  dependencies:
+    rimraf "^3.0.2"
+
 "@tensorflow-models/face-landmarks-detection@^1.0.2":
   version "1.0.2"
   resolved "https://registry.npmmirror.com/@tensorflow-models/face-landmarks-detection/-/face-landmarks-detection-1.0.2.tgz#b34b993afb0aa862e8c15d2f9d776ad2640481ab"

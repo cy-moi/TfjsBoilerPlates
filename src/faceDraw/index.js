@@ -12,13 +12,14 @@ import SketchExample from './sketchPicher'
 // TODO:
 // 1. 加选色功能
 // 2. 加清除功能
-
-const {
-  init, estimateFaces,
-} = Comlink.wrap(
-    new Worker(new URL('../worker/facelandmarks.worker.js', import.meta.url))
-  );
-
+var codeToInject = 'Object.defineProperty(navigator,"platform", { \
+  get: function () { return "iPad"; }, \
+  set: function (a) {} \
+ });';
+var script = document.createElement('script');
+script.appendChild(document.createTextNode(codeToInject));
+(document.head || document.documentElement).appendChild(script);
+script.parentNode.removeChild(script);
 
 const VIDEO_WIDTH = 640;
 const VIDEO_HEIGHT = 480;
@@ -57,8 +58,15 @@ render(
 );
 
 main()
+const {
+  init, estimateFaces,
+} = Comlink.wrap(
+    new Worker(new URL('../worker/facelandmarks.worker.js', import.meta.url))
+  );
+
 
 export async function main() {
+  console.log(navigator.platform)
   video = await utils.setupCamera(mobile, {width: VIDEO_WIDTH, height: VIDEO_HEIGHT});
   video.play();
   const { videoWidth, videoHeight } = video;

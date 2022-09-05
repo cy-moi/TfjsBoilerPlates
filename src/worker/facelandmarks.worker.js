@@ -3,7 +3,7 @@ import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detec
 import '@tensorflow/tfjs-core';
 // Register WebGL backend.
 import '@tensorflow/tfjs-backend-webgl';
-import '@mediapipe/face_mesh';
+// import '@mediapipe/face_mesh';
 
 let detector;
 
@@ -13,7 +13,7 @@ async function init() {
     runtime: 'tfjs'
   };
   detector = await faceLandmarksDetection.createDetector(model, detectorConfig);
-  console.log('ready');
+  console.log('ready')
 }
 
 async function estimateFaces(image, flipHorizontal = false) {

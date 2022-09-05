@@ -1,0 +1,16 @@
+[
+	{
+		"name": "smoke",
+		"path": "/playground/demoSite/images/thug_smoke.png",
+		"alignPos": 13,
+		"alignMode": "left",
+		"widthCoef": 0.5
+	},
+	{
+		"name": "glasses",
+		"path": "/playground/demoSite/images/wp-file.png",
+		"alignPos": 168,
+		"alignMode": "center",
+		"widthCoef": 1
+	}
+]

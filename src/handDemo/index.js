@@ -1,5 +1,6 @@
 import * as Comlink from 'comlink';
-import { init, estimateHands } from '../worker/handpose.worker';
+import { init, estimateHands } from '../models/handpose';
+import { drawPoint, isMobile, setupCamera } from './utils';
 import './index.css';
 
 const mobile = isMobile();
@@ -9,10 +10,9 @@ let ctx;
 mainWorker()
 // mainAlt()
 async function mainWorker() {
-  const video = await setupCamera();
-  const videoWidth = video.videoWidth;
-  const videoHeight = video.videoHeight;
-
+  const video = await setupCamera(mobile);
+  video.play();
+  const { videoWidth, videoHeight } = video;
   console.log(`${videoWidth} x ${videoHeight}`);
 
   await init()
@@ -28,6 +28,7 @@ async function mainWorker() {
 
   requestAnimationFrame(landmarksContinue)
 }
+
 async function landmarks() {
   const imageData = await getImageFromVideo()
   const predictions = await estimateHands(imageData, {width: video.videoWidth, height: video.videoHeight});
@@ -67,41 +68,6 @@ async function getImageFromVideo() {
   return imageData;
 }
 
-function isMobile() {
-  const isAndroid = /Android/i.test(navigator.userAgent);
-  const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  return isAndroid || isiOS;
-}
-
-async function setupCamera() {
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    throw new Error(
-      'Browser API navigator.mediaDevices.getUserMedia not available'
-    );
-  }
-
-  const video = document.getElementById('video');
-  video.muted = "muted";
-  const stream = await navigator.mediaDevices.getUserMedia({
-    audio: false,
-    video: {
-      facingMode: 'user',
-      // Only setting the video to a specified size in order to accommodate a
-      // point cloud, so on mobile devices accept the default size.
-      // width: mobile ? undefined : VIDEO_WIDTH,
-      // height: mobile ? undefined : VIDEO_HEIGHT
-    },
-  });
-  video.srcObject = stream;
-
-  return new Promise((resolve, reject) => {
-    video.onloadedmetadata = () => {
-      // console.log(">>> onloadedmetadat")
-      video.play();
-      resolve(video);
-    };
-  });
-}
 
 function drawKeypoints(keypoints) {
   // console.log(keypoints)
@@ -110,13 +76,6 @@ function drawKeypoints(keypoints) {
   // ctx.clearRect(0, 0, 300, 400);
 
   for (let i = 0; i < keypointsArray.length; i++) {
-    drawPoint(keypointsArray[i].x - 2, keypointsArray[i].y - 2, 3);
+    drawPoint(ctx, keypointsArray[i], 3);
   }
-}
-
-function drawPoint(x, y, r) {
-  // console.log('drawPoint', y, x, r)
-  ctx.beginPath();
-  ctx.arc(x, y, r, 0, 2 * Math.PI);
-  ctx.fill();
 }

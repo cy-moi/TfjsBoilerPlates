@@ -9,13 +9,14 @@ let detector;
 export async function init() {
   const model = handPoseDetection.SupportedModels.MediaPipeHands;
   const detectorConfig = {
-    runtime: 'tfjs', // or 'mediapipe',
+    runtime: 'mediapipe', // or 'tfjs',
+    solutionPath: `https://cdn.jsdelivr.net/npm/@mediapipe/hands@${hands.VERSION}`,
   }
   detector = await handPoseDetection.createDetector(model, detectorConfig);
   console.log("ready");
 }
 
-export async function estimateHands(detector, imageData, flipHorizontal = false) {
+export async function estimateHands(imageData, flipHorizontal = false) {
   const predictions = await detector.estimateHands(imageData, flipHorizontal);
   return predictions
 }

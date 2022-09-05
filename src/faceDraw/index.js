@@ -1,6 +1,8 @@
-import '@mediapipe/face_mesh';
-import {init, estimateFaces } from '../worker/facelandmarks.worker';
+// import { init, estimateFaces } from '../worker/facelandmarks.worker';
+import * as Comlink from 'comlink';
 import * as utils from './utils';
+// import FaceLandmarkWorker from '../worker/facelandmarks.worker';
+
 // import { Button } from 'Src/components/Button'
 import React from 'react';
 import { render } from 'react-dom';
@@ -10,6 +12,13 @@ import SketchExample from './sketchPicher'
 // TODO:
 // 1. 加选色功能
 // 2. 加清除功能
+
+const {
+  init, estimateFaces,
+} = Comlink.wrap(
+    new Worker(new URL('../worker/facelandmarks.worker.js', import.meta.url))
+  );
+
 
 const VIDEO_WIDTH = 640;
 const VIDEO_HEIGHT = 480;

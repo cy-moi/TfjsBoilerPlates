@@ -1,21 +1,27 @@
-import '@mediapipe/face_mesh';
+import * as Comlink from 'comlink';
+import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import '@tensorflow/tfjs-core';
 // Register WebGL backend.
 import '@tensorflow/tfjs-backend-webgl';
-import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
+import '@mediapipe/face_mesh';
 
 let detector;
 
-export async function init() {
+async function init() {
   const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const detectorConfig = {
     runtime: 'tfjs'
   };
   detector = await faceLandmarksDetection.createDetector(model, detectorConfig);
+  console.log('ready');
 }
 
-export async function estimateFaces(image, flipHorizontal = false) {
+async function estimateFaces(image, flipHorizontal = false) {
   const predictions = await detector.estimateFaces(image, {flipHorizontal});
   return predictions;
 
 }
+
+Comlink.expose({
+  init, estimateFaces,
+})

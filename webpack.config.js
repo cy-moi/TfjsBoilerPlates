@@ -12,15 +12,15 @@ module.exports = {
   devtool: 'inline-source-map',
   module: {
     rules: [
-      {
-        test: /\.worker\.(js|ts)$/i,
-        use: [{
-          loader: 'comlink-loader',
-          options: {
-            singleton: true
-          }
-        }]
-      },
+      // {
+      //   test: /\.worker\.(js|ts)$/i,
+      //   use: [{
+      //     loader: 'comlink-loader',
+      //     options: {
+      //       singleton: true
+      //     }
+      //   }]
+      // },
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],

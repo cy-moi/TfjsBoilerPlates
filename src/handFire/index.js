@@ -1,11 +1,19 @@
 import * as Comlink from 'comlink';
-import { init, estimateHands } from '../models/handpose';
-import { drawPoint, isMobile, setupCamera } from '../utils';
-// import './index.css';
+// import { init, estimateHands } from '../models/handpose';
+import { isMobile, setupCamera } from '../utils';
+import { Parts, createParts, updateParts, renderParts} from './particles';
+import './styles.css';
+
 
 const mobile = isMobile();
 
 let ctx;
+
+const {
+  init, estimateHands,
+} = Comlink.wrap(
+    new Worker(new URL('../worker/handpose.worker.js', import.meta.url))
+  );
 
 mainWorker()
 // mainAlt()
@@ -25,28 +33,39 @@ async function mainWorker() {
   ctx.strokeStyle = 'red';
   ctx.fillStyle = 'red';
   ctx.clearRect(0, 0, videoWidth, videoHeight);
-
+  console.log("inited");
   requestAnimationFrame(landmarksContinue)
 }
 
 async function landmarks() {
   const imageData = await getImageFromVideo()
   const predictions = await estimateHands(imageData, {width: video.videoWidth, height: video.videoHeight});
-
   ctx.clearRect(0, 0, video.videoWidth, video.videoHeight);
   ctx.globalCompositeOperation = 'source-over';
   ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0,
     video.videoWidth, video.videoHeight);
 
-  if (predictions.length > 0) {
-      drawKeypoints(predictions[0].keypoints);
+    if(predictions.length > 1) results = [];
+    for(const predict of predictions) {
+      if (predict.handedness == 'Right' || predict.handedness == 'Left') {
+        results.push(predict.keypoints);
+  
+      }
     }
-  // }
-}
-
-function findClosestResult(landmarks, curLd){
-  return (landmarks[0][0][0] - curLd[0][0])**2 + (landmarks[0][0][1] - curLd[0][1])**2
-          > (landmarks[1][0][0] - curLd[1][0])**2 + (landmarks[1][0][1] - curLd[1][1])**2 ? 0 : 1;
+  
+    for(const result of results) {
+      var distance = ((result[4].x - result[12].x)**2 + (result[4].y - result[12].y)**2)**0.5
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.fillStyle = 'hsla(0, 0%, 0%, .3)';
+      // ctx.clearRect(0, 0, video.videoWidth, video.videoHeight);
+      ctx.globalCompositeOperation = 'lighter';
+      console.log(...result[9])
+      createParts({...result[9]}, {min:1, max:distance});
+      updateParts({...result[9]}, {min:1, max:distance});
+      renderParts();
+      globalTick++;
+    }
+  
 }
 
 async function landmarksContinue() {
@@ -68,14 +87,18 @@ async function getImageFromVideo() {
   return imageData;
 }
 
+const clear = function(){
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.fillStyle = 'hsla(0, 0%, 0%, .3)';
+  ctx.fillRect(0, 0, cw, ch);
+  ctx.globalCompositeOperation = 'lighter';
+};
 
-function drawKeypoints(keypoints) {
-  // console.log(keypoints)
-  const keypointsArray = keypoints;
-
-  // ctx.clearRect(0, 0, 300, 400);
-
-  for (let i = 0; i < keypointsArray.length; i++) {
-    drawPoint(ctx, keypointsArray[i], 3);
-  }
-}
+const loop = function(){
+  window.requestAnimFrame(loop, ctx);
+  clear();
+  createParts();
+  updateParts();
+  renderParts(ctx);
+  globalTick++;
+};

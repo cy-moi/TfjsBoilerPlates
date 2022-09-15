@@ -1,9 +1,6 @@
 import './style.css';
 import * as Comlink from 'comlink';
 import * as utils from './utils';
-// import FaceLandmarkWorker from '../worker/facelandmarks.worker';
-
-// import { Button } from 'Src/components/Button'
 import React from 'react';
 import { render } from 'react-dom';
 import SketchExample from './sketchPicher';
@@ -18,7 +15,6 @@ const NUM_IRIS_KEYPOINTS = 5;
 let DRAWN_STICKERS = []
 
 const mobile = utils.isMobile();
-// const cursor = utils.cursorImage();
 
 let video,canvas,ctx;
 let color;
@@ -34,7 +30,6 @@ const buttonContainer = document.getElementById('button');
 
 render(
   (
-
     <div className='bottom'>
       <SketchExample onRef={setAppRef}/>
       <button size="small" className='util' onClick={back}>Undo</button>
@@ -122,16 +117,13 @@ async function estimateContinue() {
 var pos = { x: 0, y: 0 };
 
 
-// new position from mouse event
-function setPosition(e) {
+function setPosition(e) { // set new mouse position
   let rect = canvas.getBoundingClientRect();
   pos.x = e.clientX - rect.left;
   pos.y = e.clientY - rect.top;
-  // if(face_origin) RELATIVE_POS = [pos.x - face_origin[0], pos.y - face_origin[1]]
 }
 
 function draw(e) {
-  // ctx.drawImage(cursor, pos.x, pos.y)
   // mouse left button must be pressed
   if (e.buttons !== 1) return;
   ctx.strokeStyle = color;
@@ -149,7 +141,7 @@ function draw(e) {
 function saveDrawing() {
   pos.x = 0;
   pos.y = 0;
-  console.log("saving")
+  // console.log("saving")
   let sticker = {
     image: new Image(),
     widthCoef: 1,
@@ -178,13 +170,13 @@ function saveDrawing() {
 }
 
 function back(){
-  // console.log('回退')
+  // console.log('undo')
   if(DRAWN_STICKERS.length){
     DRAWN_STICKERS.pop()
   }
 };
 
 function clear(){
-  // console.log('清除')
+  // console.log('clear')
   DRAWN_STICKERS = []
 }

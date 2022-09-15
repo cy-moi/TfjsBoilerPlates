@@ -8,6 +8,7 @@ import './styles.css';
 const mobile = isMobile();
 
 let ctx;
+let globalTick = 0;
 
 const {
   init, estimateHands,
@@ -45,7 +46,7 @@ async function landmarks() {
   ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0,
     video.videoWidth, video.videoHeight);
 
-    if(predictions.length > 1) results = [];
+    const results = [];
     for(const predict of predictions) {
       if (predict.handedness == 'Right' || predict.handedness == 'Left') {
         results.push(predict.keypoints);
@@ -59,10 +60,10 @@ async function landmarks() {
       ctx.fillStyle = 'hsla(0, 0%, 0%, .3)';
       // ctx.clearRect(0, 0, video.videoWidth, video.videoHeight);
       ctx.globalCompositeOperation = 'lighter';
-      console.log(...result[9])
-      createParts({...result[9]}, {min:1, max:distance});
-      updateParts({...result[9]}, {min:1, max:distance});
-      renderParts();
+      // console.log(...result[9])
+      createParts(result[9], {min:1, max:distance});
+      updateParts(result[9], {min:1, max:distance});
+      renderParts(ctx);
       globalTick++;
     }
   

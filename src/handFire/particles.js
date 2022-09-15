@@ -1,5 +1,14 @@
 // Inspired by https://codepen.io/jackrugile/pen/nBNLMQ
-
+var cw = 300,
+    ch = 300,
+    parts = [],
+    partCount = 200,
+    partsFull = false,
+    hueRange = 50,
+    globalTick = 0,
+    rand = function(min, max){
+        return Math.floor( (Math.random() * (max - min + 1) ) + min);
+    };
 const Part = function(position, radiusrange){
   this.reset(position, radiusrange);
 };
@@ -72,10 +81,10 @@ const updateParts = function(position, radiusRange){
   }
 };
 
-const renderParts = function(){
+const renderParts = function(ctx){
   let i = parts.length;
   while(i--){
-    parts[i].render();
+    parts[i].render(ctx);
   }
 };
 

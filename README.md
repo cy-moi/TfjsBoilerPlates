@@ -5,3 +5,8 @@
 
 Current demo: `entries=hand yarn start`
 
+# TODO
+- [ ] clean up codes and make easy-to-use templates with ts
+- [ ] example with full body detection
+- [ ] example with 3D graphics library, such as three.js
+- [ ] add another face doodle example in which hand detections used for drawing

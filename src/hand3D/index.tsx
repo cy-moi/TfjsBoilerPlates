@@ -60,7 +60,6 @@ async function landmarksContinue() {
 async function getImageFromVideo() {
   const video = document.getElementById('video') as HTMLVideoElement;
   const canvas = document.createElement('canvas') as HTMLCanvasElement;
-  // canvas.style += " max-width: 100%";
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   const ctx = canvas.getContext('2d');
@@ -76,9 +75,7 @@ function drawKeypoints(keypoints) {
   // console.log(keypoints)
   const keypointsArray = keypoints;
 
-  // ctx.clearRect(0, 0, 300, 400);
-
-  for (let i = 0; i < keypointsArray.length; i++) {
-    drawPoint(ctx, keypointsArray[i], 3);
+  for (const keypoint of keypointsArray) {
+    drawPoint(ctx, keypoint, 3);
   }
 }

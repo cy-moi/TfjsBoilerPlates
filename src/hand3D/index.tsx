@@ -5,18 +5,22 @@ import { drawPoint, isMobile, setupCamera } from '../utils';
 const mobile = isMobile();
 
 let ctx;
+declare let video;
 
-mainWorker()
+setupCamera(mobile).then((vid) => {
+  video = vid;
+  mainWorker()
+})
+
 // mainAlt()
 async function mainWorker() {
-  const video = await setupCamera(mobile);
   video.play();
   const { videoWidth, videoHeight } = video;
   console.log(`${videoWidth} x ${videoHeight}`);
 
   await init()
 
-  const canvas = document.getElementById('output');
+  const canvas = document.getElementById('output') as HTMLCanvasElement;
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
 
@@ -30,7 +34,7 @@ async function mainWorker() {
 
 async function landmarks() {
   const imageData = await getImageFromVideo()
-  const predictions = await estimateHands(imageData, {width: video.videoWidth, height: video.videoHeight});
+  const predictions = await estimateHands(imageData);
 
   ctx.clearRect(0, 0, video.videoWidth, video.videoHeight);
   ctx.globalCompositeOperation = 'source-over';
@@ -54,8 +58,8 @@ async function landmarksContinue() {
 }
 
 async function getImageFromVideo() {
-  const video = document.getElementById('video')
-  const canvas = document.createElement('canvas')
+  const video = document.getElementById('video') as HTMLVideoElement;
+  const canvas = document.createElement('canvas') as HTMLCanvasElement;
   // canvas.style += " max-width: 100%";
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;

@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es6",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "strict": false,
+    "sourceMap": true,
+    "lib": [
+      "dom",
+      "es5",
+      "ES2015.Promise",
+      "es2015",
+      "es2017"
+    ],
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    // "forceConsistentCasingInFileNames": false,
+    // "isolatedModules": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noImplicitReturns": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "skipLibCheck": true,
+    // "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "Src": [
+        "src"
+      ],
+      "crypto": [
+        "node_modules/crypto-js"
+      ]
+    },
+    "outDir": "./build"
+  },
+  "include": [
+    "src",
+    "src/types/custom.d.ts"
+  ],
+  "exclude": [
+    "node_modules/**/",
+    "public",
+    "dist",
+    "mock/",
+    "src/assets"
+  ]
+}

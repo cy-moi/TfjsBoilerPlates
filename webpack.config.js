@@ -26,12 +26,12 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.js?$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env', '@babel/preset-typescript']
           }
         }
       }
@@ -47,7 +47,7 @@ module.exports = {
     static: './dist',
   },
   resolve: {
-    extensions: [ '.js' ],
+    extensions: [ '.js', '.jsx','.ts', '.tsx' ],
   },
   devServer: {
     static: {

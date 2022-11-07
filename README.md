@@ -1,4 +1,6 @@
-# TfjsBoilerPlates
+# TfjsBoilerPlates (Under Restructure)
+
+I need to change all of these. Currently it is a mess. Also I used mediapipe and tensorflowjs-models which are redundant. Decided to stick with the latter one because it would be easier to make changes. COMPLETE THIS IN NOVEMBER I HOPE?
 
 # Entries
 `entries=entry_name` set environment entries variable to select entry point. Url falls back to `/entry_name`.

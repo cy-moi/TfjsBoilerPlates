@@ -43,10 +43,6 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
   },
-  devtool: 'inline-source-map',
-  devServer: {
-    static: './dist',
-  },
   resolve: {
     extensions: [ '.js', '.jsx','.ts', '.tsx' ],
   },
@@ -62,11 +58,11 @@ module.exports = {
   },
   plugins:[
     ...getHtmlWebpackPlugins({isDev: true}),
-    new CopyPlugin({
-      patterns: [{
-        from: './assets',
-        to: './assets'
-      }]
-    })
+    // new CopyPlugin({
+    //   patterns: [{
+    //     from: './assets',
+    //     to: './assets'
+    //   }]
+    // })
   ]
 }

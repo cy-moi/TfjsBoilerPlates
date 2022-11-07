@@ -1,16 +1,17 @@
 import * as Comlink from 'comlink';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
+import { MediaPipeFaceMeshTfjsModelConfig } from '@tensorflow-models/face-landmarks-detection'; 
 import '@tensorflow/tfjs-core';
 // Register WebGL backend.
 import '@tensorflow/tfjs-backend-webgl';
-// import '@mediapipe/face_mesh';
 
 let detector;
 
 async function init() {
   const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
-  const detectorConfig = {
-    runtime: 'tfjs'
+  const detectorConfig : MediaPipeFaceMeshTfjsModelConfig = {
+    runtime: 'tfjs', 
+    refineLandmarks: true
   };
   detector = await faceLandmarksDetection.createDetector(model, detectorConfig);
   console.log('ready')

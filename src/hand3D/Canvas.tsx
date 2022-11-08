@@ -30,7 +30,7 @@ const Canvas = props => {
     const render = async () => {
       frameCount++
       const imageData = getImageFromVideo(video);
-      if(worker.ready() !== undefined) worker.estimate(imageData);
+      if(worker.ready()) worker.estimate(imageData);
       draw(context, frameCount)
       animationFrameId = window.requestAnimationFrame(render)
     }

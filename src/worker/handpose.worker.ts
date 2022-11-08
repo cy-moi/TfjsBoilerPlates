@@ -22,11 +22,12 @@ export class HandWorker {
   }
 
   public ready() {
-    return this.detector;
+    return this.detector !== undefined;
   }
   
   public async estimate(imageData = null, flipHorizontal = false) {
     // console.log(this.detector, "estimate")
+    if(this.detector === undefined) return null;
     const predictions = await this.detector.estimateHands(imageData);
     return predictions
   }

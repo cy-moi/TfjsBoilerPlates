@@ -7,10 +7,6 @@ import { HandWorker } from '../worker/handpose.worker';
 
 function App() {
   
-  const worker : Comlink.Remote<HandWorker> = Comlink.wrap(
-    new Worker(new URL(`../worker/handpose.worker.ts`, import.meta.url))
-  );
-
   const [video, setVid] = useState();
 
   useEffect(() => {

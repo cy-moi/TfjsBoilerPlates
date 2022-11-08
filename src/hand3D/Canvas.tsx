@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { getImageFromVideo } from '../utils';
 import * as Comlink from 'comlink';
 
 const Canvas = props => {
@@ -26,9 +27,10 @@ const Canvas = props => {
     let animationFrameId
     
     //Our draw came here
-    const render = () => {
+    const render = async () => {
       frameCount++
-      worker.estimate(null);
+      const imageData = getImageFromVideo(video);
+      worker.estimate(imageData);
       draw(context, frameCount)
       animationFrameId = window.requestAnimationFrame(render)
     }

@@ -91,17 +91,23 @@ async function setupCamera(mobile, size) {
 
   const video = document.getElementById('video');
   video.muted = "muted";
-  const stream = await navigator.mediaDevices.getUserMedia({
-    audio: false,
-    video: {
-      facingMode: 'user',
-      // Only setting the video to a specified size in order to accommodate a
-      // point cloud, so on mobile devices accept the default size.
-      width: mobile ? undefined : VIDEO_WIDTH,
-      height: mobile ? undefined : VIDEO_HEIGHT
-    },
-  });
-  video.srcObject = stream;
+  console.log(navigator)
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: {
+        facingMode: 'user',
+        // Only setting the video to a specified size in order to accommodate a
+        // point cloud, so on mobile devices accept the default size.
+        width: mobile ? undefined : VIDEO_WIDTH,
+        height: mobile ? undefined : VIDEO_HEIGHT
+      },
+    });
+    video.srcObject = stream;
+  } catch(e) {
+    console.log(e);
+  }
+
 
   return new Promise((resolve, reject) => {
     video.onloadedmetadata = () => {
@@ -110,7 +116,7 @@ async function setupCamera(mobile, size) {
   });
 }
 
-async function getImageFromVideo(video) {
+function getImageFromVideo(video) {
   const canvas = document.createElement('canvas')
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;

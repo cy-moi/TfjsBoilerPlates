@@ -2,8 +2,7 @@
 import React, { useLayoutEffect, useState }from 'react';
 import Canvas from './Canvas';
 import * as Comlink from 'comlink';
-import { isMobile } from '@tensorflow/tfjs-core/dist/device_util';
-import { setupCamera } from '../utils';
+import { isMobile, setupCamera } from '../utils';
 import { HandWorker } from '../worker/handpose.worker';
 
 function App() {
@@ -20,6 +19,7 @@ function App() {
       console.log(document.getElementById("video"))
       const vid = await setupCamera(mobile);
       setVid(vid);
+      console.log(vid);
     }
 
     initCamera();

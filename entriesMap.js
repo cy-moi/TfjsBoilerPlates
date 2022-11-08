@@ -3,6 +3,7 @@ const entriesMap = {
   // faceDraw: './src/faceDraw/index',
   // handFire: './src/handFire/index',
   hand3D: './src/hand3D/index',
+  handExp: './src/handExperiemnt/index',
   // segment: './src/segmentDemo/index'
 }
 

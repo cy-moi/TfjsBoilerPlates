@@ -1,0 +1,8 @@
+.video {
+  visibility: hidden;
+  position: absolute;
+}
+
+.output {
+  background: gainsboro;
+}

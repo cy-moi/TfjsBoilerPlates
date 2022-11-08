@@ -1,5 +1,5 @@
 
-import React, { useLayoutEffect, useState }from 'react';
+import React, { useEffect, useState }from 'react';
 import Canvas from './Canvas';
 import * as Comlink from 'comlink';
 import { isMobile, setupCamera } from '../utils';
@@ -11,21 +11,21 @@ function App() {
     new Worker(new URL(`../worker/handpose.worker.ts`, import.meta.url))
   );
 
-  const [video, setVid] = useState<HTMLVideoElement>(null);
+  const [video, setVid] = useState();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     async function initCamera() {
       const mobile = isMobile;
-      console.log(document.getElementById("video"))
       const vid = await setupCamera(mobile);
       setVid(vid);
-      console.log(vid);
+      // console.log(vid.play());
+      vid.play();
     }
 
     initCamera();
 
     return () => {}
-    
+
   }, [])
 
   const draw = (ctx, frameCount) => {
@@ -36,7 +36,11 @@ function App() {
     ctx.fill()
   }
   
-  return <Canvas draw={draw} worker={worker} video={video}/>
+  return (
+    <>
+      {video ? <Canvas draw={draw} video={video}/> : null }
+    </>
+    )
 }
 
 export default App

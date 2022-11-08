@@ -7,8 +7,8 @@ import '@tensorflow/tfjs-backend-webgl';
 
 
 export class HandWorker {
-  
-  private detector;
+
+  private detector? : any;
 
   public async init() {
     console.log("initiating...")
@@ -17,10 +17,16 @@ export class HandWorker {
       runtime: 'tfjs', // or 'mediapipe',
     }
     this.detector = await handPoseDetection.createDetector(model, detectorConfig);
+    console.log(this.detector)
     console.log("ready");
   }
+
+  public ready() {
+    return this.detector;
+  }
   
-  public async estimate(imageData, flipHorizontal = false) {
+  public async estimate(imageData = null, flipHorizontal = false) {
+    // console.log(this.detector, "estimate")
     const predictions = await this.detector.estimateHands(imageData);
     return predictions
   }

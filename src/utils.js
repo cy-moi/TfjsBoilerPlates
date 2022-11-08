@@ -91,7 +91,6 @@ async function setupCamera(mobile, size) {
 
   const video = document.getElementById('video');
   video.muted = "muted";
-  console.log(navigator)
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: false,
@@ -108,6 +107,7 @@ async function setupCamera(mobile, size) {
     console.log(e);
   }
 
+  // console.log(video.play());
 
   return new Promise((resolve, reject) => {
     video.onloadedmetadata = () => {

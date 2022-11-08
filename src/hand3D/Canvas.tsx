@@ -1,26 +1,26 @@
 import React, { useRef, useEffect } from 'react';
 import { getImageFromVideo } from '../utils';
+import { HandWorker } from '../worker/handpose.worker';
 import * as Comlink from 'comlink';
 
 const Canvas = props => {
+  const worker : Comlink.Remote<HandWorker> = Comlink.wrap(
+    new Worker(new URL(`../worker/handpose.worker.ts`, import.meta.url))
+  );
 
-  const { video, worker, draw } : {video: HTMLVideoElement, worker: Comlink.Remote<any>, draw : Function} = props;
+  const { video, draw } : {video: HTMLVideoElement, draw : Function} = props;
 
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    
-    async function initModel() {
-      video.play();
+
+    (async () => {
       await worker.init();
-    }
+    })();
 
-    initModel();
-
-  }, []);
+  }, [])
   
   useEffect(() => {
-    
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
     let frameCount = 0
@@ -30,7 +30,7 @@ const Canvas = props => {
     const render = async () => {
       frameCount++
       const imageData = getImageFromVideo(video);
-      worker.estimate(imageData);
+      if(worker.ready() !== undefined) worker.estimate(imageData);
       draw(context, frameCount)
       animationFrameId = window.requestAnimationFrame(render)
     }

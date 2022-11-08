@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState }from 'react';
+import React, { useLayoutEffect, useState }from 'react';
 import Canvas from './Canvas';
 import * as Comlink from 'comlink';
 import { isMobile } from '@tensorflow/tfjs-core/dist/device_util';
@@ -12,13 +12,13 @@ function App() {
     new Worker(new URL(`../worker/handpose.worker.ts`, import.meta.url))
   );
 
-  const [video, setVid] = useState<HTMLVideoElement>();
+  const [video, setVid] = useState<HTMLVideoElement>(null);
 
-  useEffect( () => {
+  useLayoutEffect(() => {
     async function initCamera() {
       const mobile = isMobile;
+      console.log(document.getElementById("video"))
       const vid = await setupCamera(mobile);
-      console.log(vid)
       setVid(vid);
     }
 

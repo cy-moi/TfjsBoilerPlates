@@ -8,9 +8,9 @@ const Canvas = props => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    video.play();
     
     async function initModel() {
+      video.play();
       await worker.init();
     }
 

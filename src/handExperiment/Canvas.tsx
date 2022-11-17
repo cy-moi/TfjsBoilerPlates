@@ -1,14 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { getImageFromVideo } from '../utils';
+import * as Comlink from 'comlink'
 import { HandWorker } from '../worker/handpose.worker';
-import * as Comlink from 'comlink';
 
 const Canvas = props => {
-  const worker : Comlink.Remote<HandWorker> = Comlink.wrap(
-    new Worker(new URL(`../worker/handpose.worker.ts`, import.meta.url))
-  );
 
-  const { video, draw } : {video: HTMLVideoElement, draw : Function} = props;
+  const { video, draw, worker} : {video: HTMLVideoElement, draw : Function, worker: Comlink.Remote<HandWorker>} = props;
 
   const canvasRef = useRef(null);
 

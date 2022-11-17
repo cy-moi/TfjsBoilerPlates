@@ -1,12 +1,14 @@
 
 import React, { useEffect, useState }from 'react';
 import Canvas from './Canvas';
-import * as Comlink from 'comlink';
 import { isMobile, setupCamera } from '../utils';
 import { HandWorker } from '../worker/handpose.worker';
+import * as Comlink from 'comlink';
 
 function App() {
-  
+  const worker : Comlink.Remote<HandWorker> = Comlink.wrap(
+    new Worker(new URL(`../worker/handpose.worker.ts`, import.meta.url))
+  );
   const [video, setVid] = useState();
 
   useEffect(() => {
@@ -34,7 +36,7 @@ function App() {
   
   return (
     <>
-      {video ? <Canvas draw={draw} video={video}/> : null }
+      {video ? <Canvas draw={draw} video={video} worker={worker}/> : null }
     </>
     )
 }

@@ -109,7 +109,7 @@ function CollectPage() {
         <div>
           Collected data: {counter}
           <br></br>
-          Current data: {buffer}
+          Current data: {Object.keys(buffer)}
           <div>
             <button onClick={deleteData}>Delete Data</button>
             <button onClick={registerData} className="submit">Register Data</button>

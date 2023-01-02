@@ -47,7 +47,7 @@ function CollectPage() {
 
   useEffect(() => {
     // console.log(buffer)
-    setAll([...allbuffer, buffer, 0])
+    setAll([...allbuffer, buffer])
   }, [buffer])
 
   const handleOrientation= (event : DeviceOrientationEvent) => {
@@ -59,7 +59,7 @@ function CollectPage() {
     setInterval(()=> {
       const time = Date.now() - start;
       setBuffer({[time]: [rotateDegrees, leftToRight, frontToBack]});
-    }, 200)
+    }, 500)
   };
 
   const handleMotionEvent = (event : DeviceMotionEvent) => {
@@ -70,7 +70,7 @@ function CollectPage() {
     setInterval(()=> {
       const time = Date.now() - start;
       setBuffer({[time]: [x, y, z]});
-    }, 200)
+    }, 500)
 
   };
 
@@ -82,6 +82,7 @@ function CollectPage() {
   const registerData = () => {
     setData([...data, [...allbuffer]]);
     setCounter(counter + 1);
+    setAll([]);
   };
 
   const handleClickClass = async(value: string, status : string) => {
@@ -90,7 +91,8 @@ function CollectPage() {
     else {
       window.removeEventListener('deviceorientation', handleOrientation);
       window.removeEventListener('devicemotion', handleMotionEvent);
-      downloadObjectAsJson(data, `${collect}`)
+      downloadObjectAsJson(data, `${collect}`);
+      setData([]);
     }
     setCollect(value);
     setCounter(0);

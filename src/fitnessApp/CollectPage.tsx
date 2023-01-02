@@ -56,10 +56,10 @@ function CollectPage() {
     const frontToBack = event.beta; // beta: front back motion
     
     // setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
-    requestAnimationFrame(()=> {
+    // requestAnimationFrame(()=> {
       const time = Date.now() - start;
-      setBuffer(...buffer, {time: rotateDegrees, leftToRight, frontToBack});
-    })
+      setBuffer([...buffer, {time: rotateDegrees, leftToRight, frontToBack}]);
+    // })
   };
 
   const handleMotionEvent = (event : DeviceMotionEvent) => {
@@ -67,9 +67,9 @@ function CollectPage() {
     const y = event.accelerationIncludingGravity.y;
     const z = event.accelerationIncludingGravity.z;
 
-    requestAnimationFrame(()=> {
-      setBuffer(...buffer, {time: x, y, z});
-    })
+    // requestAnimationFrame(()=> {
+      setBuffer([...buffer, {time: x, y, z}]);
+    // })
 
   };
 
@@ -109,7 +109,7 @@ function CollectPage() {
         <div>
           Collected data: {counter}
           <br></br>
-          Current data: {buffer}
+          {/* Current data: {buffer} */}
           <div>
             <button onClick={deleteData}>Delete Data</button>
             <button onClick={registerData} className="submit">Register Data</button>

@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import Canvas from '../components/Canvas';
-// import { isMobile, setupCamera } from '../utils';
-// import { HandWorker } from '../worker/handpose.worker';
-// import * as Comlink from 'comlink';
 import * as fitClasses from "./classes.json";
 import { downloadObjectAsJson } from "./helpers";
 import './styles.css'
+// import { trainModel } from "./train";
 
 function CollectPage() {
   const [collect, setCollect] = useState<string>(undefined);
@@ -14,6 +11,8 @@ function CollectPage() {
   const [allbuffer, setAll] = useState([]);
   const [data, setData] = useState<Array<[]>>([]);
   const [start, setStart] = useState(null);
+
+  // useEffect(() => {trainModel()}, [])
 
   const addEventListeners = async() => {
     if ((DeviceOrientationEvent as any).requestPermission
@@ -40,7 +39,7 @@ function CollectPage() {
       }
     }
 
-    window.addEventListener('deviceorientation', handleOrientation);
+    // window.addEventListener('deviceorientation', handleOrientation, true);
     window.addEventListener("devicemotion", handleMotionEvent, true);
 
   }
@@ -54,12 +53,12 @@ function CollectPage() {
     const rotateDegrees = event.alpha; // alpha: rotation around z-axis
     const leftToRight = event.gamma; // gamma: left to right
     const frontToBack = event.beta; // beta: front back motion
-    
+
     // setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
-    setInterval(()=> {
-      const time = Date.now() - start;
-      setBuffer({[time]: [rotateDegrees, leftToRight, frontToBack]});
-    }, 500)
+    // setInterval(()=> {
+      // const time = Date.now() - start;
+      setBuffer({"orientation": [rotateDegrees, leftToRight, frontToBack]});
+    // }, 500)
   };
 
   const handleMotionEvent = (event : DeviceMotionEvent) => {
@@ -67,10 +66,15 @@ function CollectPage() {
     const y = event.accelerationIncludingGravity.y;
     const z = event.accelerationIncludingGravity.z;
 
-    setInterval(()=> {
-      const time = Date.now() - start;
-      setBuffer({[time]: [x, y, z]});
-    }, 500)
+    const rotateDegrees = event.rotationRate.alpha; // alpha: rotation around z-axis
+    const leftToRight = event.rotationRate.gamma; // gamma: left to right
+    const frontToBack = event.rotationRate.beta; // beta: front back motion
+
+
+    // setInterval(()=> {
+      // const time = Date.now() - start;
+      setBuffer({"motion": [x, y, z, rotateDegrees, leftToRight, frontToBack]});
+    // }, 500)
 
   };
 
@@ -115,7 +119,7 @@ function CollectPage() {
           <br></br>
           Current data: {Object.keys(buffer)}
           <div>
-            <button onClick={deleteData}>Delete Data</button>
+            <button onClick={deleteData} className="restart">Restart</button>
             <button onClick={registerData} className="submit">Register Data</button>
             <button onClick={() => handleClickClass(undefined, "end")}>
               End Collect

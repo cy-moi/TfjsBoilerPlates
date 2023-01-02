@@ -49,9 +49,10 @@ function CollectPage() {
     const leftToRight = event.gamma; // gamma: left to right
     const frontToBack = event.beta; // beta: front back motion
     
-    setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
-    test.push([rotateDegrees, leftToRight, frontToBack])
-    console.log(buffer)
+    // setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
+    requestAnimationFrame(()=> {
+      setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack]);
+    })
   };
 
   const handleMotionEvent = (event : DeviceMotionEvent) => {
@@ -59,8 +60,9 @@ function CollectPage() {
     const y = event.accelerationIncludingGravity.y;
     const z = event.accelerationIncludingGravity.z;
 
-    setBuffer([...buffer, x, y, z]);
-    test.push([x, y, z])
+    requestAnimationFrame(()=> {
+      setBuffer([...buffer, x, y, z]);
+    })
 
   };
 

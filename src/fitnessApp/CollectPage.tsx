@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 // import * as Comlink from 'comlink';
 import * as fitClasses from "./classes.json";
 import { downloadObjectAsJson } from "./helpers";
+import './styles.css'
 
 function CollectPage() {
   const [collect, setCollect] = useState<string>(undefined);
@@ -73,7 +74,7 @@ function CollectPage() {
     else {
       window.removeEventListener('deviceorientation', handleOrientation);
       window.removeEventListener('devicemotion', handleMotionEvent);
-      downloadObjectAsJson(data, `${collect}-data`)
+      downloadObjectAsJson(data, `${collect}`)
     }
     setCollect(value);
     setCounter(0);
@@ -81,21 +82,28 @@ function CollectPage() {
 
   return (
     <>
+    <div styles={{display: 'flex'}}>
       {fitClasses &&
         Object.keys(fitClasses).map((value, index) => (
           <button onClick={() => handleClickClass(value, "start")} key={index}>
             {value}
           </button>
         ))}
+    </div>
+
       {collect && (
         <div>
           Collected data: {counter}
-          Current data: {buffer}
-          <button onClick={deleteData}>Delete Data</button>
-          <button onClick={registerData} styles={{'padding': '30px 30px'}}>Register Data</button>
-          <button onClick={() => handleClickClass(undefined, "end")}>
-            End Collect
-          </button>
+          <br></br>
+          Current data: {buffer[buffer.length - 1]}
+          <div>
+            <button onClick={deleteData}>Delete Data</button>
+            <button onClick={registerData} className="submit">Register Data</button>
+            <button onClick={() => handleClickClass(undefined, "end")}>
+              End Collect
+            </button>
+          </div>
+
         </div>
       )}
     </>

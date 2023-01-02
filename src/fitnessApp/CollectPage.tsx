@@ -11,6 +11,7 @@ function CollectPage() {
   const [collect, setCollect] = useState<string>(undefined);
   const [counter, setCounter] = useState<number>(0);
   const [buffer, setBuffer] = useState([]);
+  const test = []
   const [data, setData] = useState<Array<[]>>([]);
 
   const addEventListeners = async() => {
@@ -49,6 +50,7 @@ function CollectPage() {
     const frontToBack = event.beta; // beta: front back motion
     
     setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
+    test.push([rotateDegrees, leftToRight, frontToBack])
     console.log(buffer)
   };
 
@@ -58,6 +60,7 @@ function CollectPage() {
     const z = event.accelerationIncludingGravity.z;
 
     setBuffer([...buffer, x, y, z]);
+    test.push([x, y, z])
 
   };
 
@@ -96,7 +99,7 @@ function CollectPage() {
         <div>
           Collected data: {counter}
           <br></br>
-          Current data: {buffer}
+          Current data: {test}
           <div>
             <button onClick={deleteData}>Delete Data</button>
             <button onClick={registerData} className="submit">Register Data</button>

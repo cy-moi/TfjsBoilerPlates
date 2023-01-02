@@ -10,7 +10,7 @@ import './styles.css'
 function CollectPage() {
   const [collect, setCollect] = useState<string>(undefined);
   const [counter, setCounter] = useState<number>(0);
-  const [buffer, setBuffer] = useState<[]>([]);
+  const [buffer, setBuffer] = useState([]);
   const [data, setData] = useState<Array<[]>>([]);
 
   const addEventListeners = async() => {
@@ -38,7 +38,7 @@ function CollectPage() {
       }
     }
 
-    window.addEventListener('deviceorientation', handleOrientation, true);
+    window.addEventListener('deviceorientation', handleOrientation);
     window.addEventListener("devicemotion", handleMotionEvent, true);
 
   }
@@ -49,6 +49,7 @@ function CollectPage() {
     const frontToBack = event.beta; // beta: front back motion
     
     setBuffer([...buffer, [rotateDegrees, leftToRight, frontToBack]])
+    console.log(buffer)
   };
 
   const handleMotionEvent = (event : DeviceMotionEvent) => {
@@ -95,7 +96,7 @@ function CollectPage() {
         <div>
           Collected data: {counter}
           <br></br>
-          Current data: {buffer[buffer.length - 1]}
+          Current data: {buffer}
           <div>
             <button onClick={deleteData}>Delete Data</button>
             <button onClick={registerData} className="submit">Register Data</button>

@@ -13,6 +13,7 @@ function CollectPage() {
   const [buffer, setBuffer] = useState([]);
   const [allbuffer, setAll] = useState([]);
   const [data, setData] = useState<Array<[]>>([]);
+  const [start, setStart] = useState(null);
 
   const addEventListeners = async() => {
     if ((DeviceOrientationEvent as any).requestPermission
@@ -44,9 +45,10 @@ function CollectPage() {
 
   }
 
-  useEffect(() => {
-    setAll([...allbuffer, ...buffer, 0])
-  }, [buffer])
+  // useEffect(() => {
+  //   console.log(buffer)
+  //   setAll([...allbuffer, ...buffer, 0])
+  // }, [buffer])
 
   const handleOrientation= (event : DeviceOrientationEvent) => {
     const rotateDegrees = event.alpha; // alpha: rotation around z-axis
@@ -55,7 +57,8 @@ function CollectPage() {
     
     // setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
     requestAnimationFrame(()=> {
-      setBuffer([rotateDegrees, leftToRight, frontToBack]);
+      const time = Date.now() - start;
+      setBuffer(...buffer, {time: rotateDegrees, leftToRight, frontToBack});
     })
   };
 
@@ -65,7 +68,7 @@ function CollectPage() {
     const z = event.accelerationIncludingGravity.z;
 
     requestAnimationFrame(()=> {
-      setBuffer([x, y, z]);
+      setBuffer(...buffer, {time: x, y, z});
     })
 
   };
@@ -80,6 +83,7 @@ function CollectPage() {
   };
 
   const handleClickClass = async(value: string, status : string) => {
+    setStart(Date.now());
     if(status === "start") await addEventListeners();
     else {
       window.removeEventListener('deviceorientation', handleOrientation);
@@ -105,7 +109,7 @@ function CollectPage() {
         <div>
           Collected data: {counter}
           <br></br>
-          Current data: {allbuffer}
+          Current data: {buffer}
           <div>
             <button onClick={deleteData}>Delete Data</button>
             <button onClick={registerData} className="submit">Register Data</button>

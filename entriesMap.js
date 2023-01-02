@@ -5,6 +5,7 @@ const entriesMap = {
   hand3D: './src/hand3D/index',
   hand: './src/handExperiemnt/index',
   // segment: './src/segmentDemo/index'
+  fitness: './src/fitnessApp/index'
 }
 
 module.exports = entriesMap

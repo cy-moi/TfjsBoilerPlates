@@ -45,10 +45,10 @@ function CollectPage() {
 
   }
 
-  useEffect(() => {
-    console.log(buffer)
-    setAll([...allbuffer, buffer, 0])
-  }, [buffer])
+  // useEffect(() => {
+  //   console.log(buffer)
+  //   setAll([...allbuffer, buffer, 0])
+  // }, [buffer])
 
   const handleOrientation= (event : DeviceOrientationEvent) => {
     const rotateDegrees = event.alpha; // alpha: rotation around z-axis

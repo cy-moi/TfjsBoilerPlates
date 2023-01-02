@@ -10,7 +10,7 @@ import './styles.css'
 function CollectPage() {
   const [collect, setCollect] = useState<string>(undefined);
   const [counter, setCounter] = useState<number>(0);
-  const [buffer, setBuffer] = useState([]);
+  const [buffer, setBuffer] = useState({});
   const [allbuffer, setAll] = useState([]);
   const [data, setData] = useState<Array<[]>>([]);
   const [start, setStart] = useState(null);
@@ -45,10 +45,10 @@ function CollectPage() {
 
   }
 
-  // useEffect(() => {
-  //   console.log(buffer)
-  //   setAll([...allbuffer, ...buffer, 0])
-  // }, [buffer])
+  useEffect(() => {
+    console.log(buffer)
+    setAll([...allbuffer, buffer, 0])
+  }, [buffer])
 
   const handleOrientation= (event : DeviceOrientationEvent) => {
     const rotateDegrees = event.alpha; // alpha: rotation around z-axis
@@ -58,7 +58,7 @@ function CollectPage() {
     // setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
     // requestAnimationFrame(()=> {
       const time = Date.now() - start;
-      setBuffer([...buffer, {time: rotateDegrees, leftToRight, frontToBack}]);
+      setBuffer({time: rotateDegrees, leftToRight, frontToBack});
     // })
   };
 
@@ -68,7 +68,7 @@ function CollectPage() {
     const z = event.accelerationIncludingGravity.z;
 
     // requestAnimationFrame(()=> {
-      setBuffer([...buffer, {time: x, y, z}]);
+      setBuffer({time: x, y, z});
     // })
 
   };
@@ -109,7 +109,7 @@ function CollectPage() {
         <div>
           Collected data: {counter}
           <br></br>
-          {/* Current data: {buffer} */}
+          Current data: {buffer}
           <div>
             <button onClick={deleteData}>Delete Data</button>
             <button onClick={registerData} className="submit">Register Data</button>

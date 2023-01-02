@@ -75,7 +75,8 @@ function CollectPage() {
   };
 
   const deleteData = () => {
-    setBuffer([]);
+    // setBuffer({});
+    setAll([])
   }
 
   const registerData = () => {

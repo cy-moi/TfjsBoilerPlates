@@ -48,7 +48,7 @@ function CollectPage() {
     const leftToRight = event.gamma; // gamma: left to right
     const frontToBack = event.beta; // beta: front back motion
     
-    setBuffer([...buffer, [rotateDegrees, leftToRight, frontToBack]])
+    setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
     console.log(buffer)
   };
 
@@ -57,7 +57,7 @@ function CollectPage() {
     const y = event.accelerationIncludingGravity.y;
     const z = event.accelerationIncludingGravity.z;
 
-    setBuffer([...buffer, [x, y, z]]);
+    setBuffer([...buffer, x, y, z]);
 
   };
 

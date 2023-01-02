@@ -11,7 +11,7 @@ function CollectPage() {
   const [collect, setCollect] = useState<string>(undefined);
   const [counter, setCounter] = useState<number>(0);
   const [buffer, setBuffer] = useState([]);
-  const test = []
+  const [allbuffer, setAll] = useState([]);
   const [data, setData] = useState<Array<[]>>([]);
 
   const addEventListeners = async() => {
@@ -44,6 +44,10 @@ function CollectPage() {
 
   }
 
+  useEffect(() => {
+    setAll([...allbuffer, ...buffer, 0])
+  }, [buffer])
+
   const handleOrientation= (event : DeviceOrientationEvent) => {
     const rotateDegrees = event.alpha; // alpha: rotation around z-axis
     const leftToRight = event.gamma; // gamma: left to right
@@ -51,7 +55,7 @@ function CollectPage() {
     
     // setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
     requestAnimationFrame(()=> {
-      setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack]);
+      setBuffer([rotateDegrees, leftToRight, frontToBack]);
     })
   };
 
@@ -61,7 +65,7 @@ function CollectPage() {
     const z = event.accelerationIncludingGravity.z;
 
     requestAnimationFrame(()=> {
-      setBuffer([...buffer, x, y, z]);
+      setBuffer([x, y, z]);
     })
 
   };
@@ -101,7 +105,7 @@ function CollectPage() {
         <div>
           Collected data: {counter}
           <br></br>
-          Current data: {test}
+          Current data: {allbuffer}
           <div>
             <button onClick={deleteData}>Delete Data</button>
             <button onClick={registerData} className="submit">Register Data</button>

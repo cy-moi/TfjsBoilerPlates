@@ -56,10 +56,10 @@ function CollectPage() {
     const frontToBack = event.beta; // beta: front back motion
     
     // setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
-    // requestAnimationFrame(()=> {
+    setInterval(()=> {
       const time = Date.now() - start;
       setBuffer({time: rotateDegrees, leftToRight, frontToBack});
-    // })
+    }, 200)
   };
 
   const handleMotionEvent = (event : DeviceMotionEvent) => {
@@ -68,7 +68,7 @@ function CollectPage() {
     const z = event.accelerationIncludingGravity.z;
 
     // requestAnimationFrame(()=> {
-      setBuffer({time: x, y, z});
+      // setBuffer({time: x, y, z});
     // })
 
   };

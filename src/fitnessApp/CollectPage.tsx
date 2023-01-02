@@ -45,10 +45,10 @@ function CollectPage() {
 
   }
 
-  // useEffect(() => {
-  //   console.log(buffer)
-  //   setAll([...allbuffer, buffer, 0])
-  // }, [buffer])
+  useEffect(() => {
+    // console.log(buffer)
+    setAll([...allbuffer, buffer, 0])
+  }, [buffer])
 
   const handleOrientation= (event : DeviceOrientationEvent) => {
     const rotateDegrees = event.alpha; // alpha: rotation around z-axis
@@ -58,7 +58,7 @@ function CollectPage() {
     // setBuffer([...buffer, rotateDegrees, leftToRight, frontToBack])
     setInterval(()=> {
       const time = Date.now() - start;
-      setBuffer({time: rotateDegrees, leftToRight, frontToBack});
+      setBuffer({[time]: [rotateDegrees, leftToRight, frontToBack]});
     }, 200)
   };
 
@@ -78,7 +78,7 @@ function CollectPage() {
   }
 
   const registerData = () => {
-    setData([...data, [...buffer]]);
+    setData([...data, [...allbuffer]]);
     setCounter(counter + 1);
   };
 

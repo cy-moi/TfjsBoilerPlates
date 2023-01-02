@@ -67,9 +67,10 @@ function CollectPage() {
     const y = event.accelerationIncludingGravity.y;
     const z = event.accelerationIncludingGravity.z;
 
-    // requestAnimationFrame(()=> {
-      // setBuffer({time: x, y, z});
-    // })
+    setInterval(()=> {
+      const time = Date.now() - start;
+      setBuffer({[time]: [x, y, z]});
+    }, 200)
 
   };
 

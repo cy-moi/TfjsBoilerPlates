@@ -57,9 +57,12 @@ export default function TestPage() {
           console.log("predict")
           // const tensor = processData(allbuffer)
           const res = await worker.estimate(allbuffer);
-          setPred(res[0].indexOf(Math.max(...res[0])));
-          if(prediction === type && prediction !== temp) setRes(result + 1);
-          setTemp(prediction);
+          if(!res) setPred("no prediction")
+          else {
+            setPred(res[0].indexOf(Math.max(...res[0])));
+            if(prediction === type && prediction !== temp) setRes(result + 1);
+            setTemp(prediction);
+          }
         } catch(err) {
           console.log(err)
           setPred(err.message)

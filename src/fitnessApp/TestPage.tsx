@@ -37,7 +37,7 @@ export default function TestPage() {
 
     askPermissionForDeviceMOtion();
 
-    window.addEventListener("devicemotion", handleMotionEvent, true);
+    window.addEventListener("devicemotion", handleMotionEvent);
   },[])
 
 

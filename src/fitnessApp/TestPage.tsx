@@ -7,7 +7,7 @@ import * as fitClasses from './classes.json';
 
 export default function TestPage() {
 
-  const BUFFER_SIZE = 275;
+  const BUFFER_SIZE = 200;
 
   const [prediction, setPred] = useState<string>(undefined);
   // const [timer, setTimer] = useState<number>(0);
@@ -88,14 +88,14 @@ export default function TestPage() {
 
 
   return (<>
-  {/* <button onClick={() => {
+  <button onClick={() => {
     const test = require('./test.json');
     setAll(test)
     setBuffer([Math.random])
-  }}>use demo data</button> */}
+  }}>use demo data</button>
   {/* <div>{temp}</div> */}
   <div>{prediction}</div>
-  <div>DO {Object.keys(fitClasses)[type]}</div>
+  <div>DO {Object.keys(fitClasses)[type]} Current Buffer Size {allbuffer.length}</div>
   <div>{result}</div>
   </>)
 }

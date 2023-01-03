@@ -99,6 +99,7 @@ export default function TestPage() {
     setBuffer({"motion": [0,0,0,0,0,0]})
   }}>use demo data</button>
   {/* <div>{temp}</div> */}
+  <div>{log}</div>
   <div>{prediction}</div>
   <div>DO {Object.keys(fitClasses)[type]} Current Buffer Size {allbuffer.length}</div>
   <div>{result}</div>

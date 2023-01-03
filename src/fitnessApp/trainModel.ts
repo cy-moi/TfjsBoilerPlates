@@ -16,7 +16,9 @@ export const processData = (el: any[]) => {
       i++;
     }
   }
-  return temp;
+
+  console.log(tf.tensor(temp).shape)
+  return tf.tensor(temp);
 }
 
 export const trainModel = async () => {

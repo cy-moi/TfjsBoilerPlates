@@ -9,9 +9,9 @@ export class MyModelWorker {
 
   private model? : any;
 
-  public async init() {
+  public async init(url) {
     console.log("initiating...")
-    this.model = await tf.loadLayersModel('./my-model');
+    this.model = await tf.loadLayersModel(url + '/assets/my-model.json');
 
     console.log(this.model)
     console.log("ready");

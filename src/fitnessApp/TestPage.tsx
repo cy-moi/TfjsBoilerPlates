@@ -7,7 +7,7 @@ import { processData } from "./trainModel";
 
 export default function TestPage() {
 
-  const BUFFER_SIZE = 200;
+  const BUFFER_SIZE = 15;
 
   const [prediction, setPred] = useState<string>(undefined);
   const [timer, setTimer] = useState<number>(0);
@@ -23,7 +23,7 @@ export default function TestPage() {
 
   useEffect(() => {
     (async() => {
-      await worker.init();
+      await worker.init(window.location.href.substring(0, window.location.href.length - 8));
     })()
 
     askPermissionForDeviceMOtion();
@@ -33,7 +33,7 @@ export default function TestPage() {
 
 
   useEffect(() => {
-    let animationFrameId: number;
+    // let animationFrameId: number;
 
     if(allbuffer.length < BUFFER_SIZE) setAll([...allbuffer, buffer])
     else {
@@ -43,21 +43,27 @@ export default function TestPage() {
 
     const predict = async() => {
       if(worker.ready()) {
-        const buf = processData(allbuffer);
-        // console.log(buf);
-        setTemp(buf);
-        const res = await worker.estimate(buf);
-        setPred(res);
-        // console.log(res);
+        try{
+          console.log("predict")
+          const buf = processData(allbuffer);
+          // console.log(buf);
+          setTemp(buf);
+          const res = await worker.estimate(buf);
+          setPred(res);
+          console.log(res);
+        } catch(err) {
+          console.log(err)
+        }
+
       }
-      animationFrameId = window.requestAnimationFrame(predict);
+      // animationFrameId = window.requestAnimationFrame(predict);
     }
 
     predict();
 
-    return () => {
-      window.cancelAnimationFrame(animationFrameId);
-    }
+    // return () => {
+    //   window.cancelAnimationFrame(animationFrameId);
+    // }
 
   }, [buffer])
 

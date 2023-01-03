@@ -3,8 +3,7 @@ import * as Comlink from 'comlink';
 import { MyModelWorker } from "src/worker/fitness.worker";
 import './styles.css'
 import { askPermissionForDeviceMOtion } from "./helpers";
-import * as tf from '@tensorflow/tfjs';
-import { processData } from "./trainModel";
+import * as fitClasses from './classes.json';
 
 export default function TestPage() {
 
@@ -14,8 +13,8 @@ export default function TestPage() {
   const [timer, setTimer] = useState<number>(0);
   const [buffer, setBuffer] = useState([]);
   const [allbuffer, setAll] = useState([]);
-  const [result, setRes] = useState("")
-  const [model, setModel] = useState(null);
+  const [result, setRes] = useState(0)
+  const [type, setType] = useState(0);
 
   const [temp, setTemp] = useState([]);
 
@@ -25,18 +24,14 @@ export default function TestPage() {
 
   useEffect(() => {
 
+    setType(Math.round(Math.random() * 3));
+
     (async() => {
       console.log("initiating...")
       const ind = window.location.href.indexOf("fitness");
       const url = window.location.href.substring(0, ind - 1)
-      setRes(url);
 
       worker.init(url);
-
-      // const mymodel = await tf.loadLayersModel(url + '/assets/my-model.json');
-  
-      // setModel(mymodel)
-      // console.log("ready");
 
     })()
 
@@ -63,8 +58,7 @@ export default function TestPage() {
           // const tensor = processData(allbuffer)
           const res = await worker.estimate(allbuffer);
           setPred(res[0].indexOf(Math.max(...res[0])));
-          console.log(res[0].indexOf(Math.max(...res[0])));
-          setTimer(Date.now());
+          if(prediction === type) setRes(result + 1);
         } catch(err) {
           console.log(err)
           setPred('error')
@@ -98,8 +92,7 @@ export default function TestPage() {
     setBuffer([Math.random])
   }}>use demo data</button> */}
   <div>{prediction}</div>
+  <div>DO {fitClasses[type]}</div>
   <div>{result}</div>
-
-  <div>{timer}</div>
   </>)
 }

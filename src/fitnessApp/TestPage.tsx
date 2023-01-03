@@ -62,7 +62,7 @@ export default function TestPage() {
           setTemp(prediction);
         } catch(err) {
           console.log(err)
-          setPred(err)
+          setPred(err.message)
         }
     }
 

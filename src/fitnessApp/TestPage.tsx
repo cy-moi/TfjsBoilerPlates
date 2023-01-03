@@ -34,12 +34,11 @@ export default function TestPage() {
       const url = window.location.href.substring(0, ind - 1)
 
       worker.init(url);
-
+      
+      await askPermissionForDeviceMOtion();
+      window.addEventListener("devicemotion", handleMotionEvent);
     })()
 
-    askPermissionForDeviceMOtion();
-
-    window.addEventListener("devicemotion", handleMotionEvent);
   },[])
 
 

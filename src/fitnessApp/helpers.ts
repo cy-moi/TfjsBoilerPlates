@@ -15,11 +15,11 @@ const askPermissionForDeviceMOtion = async() => {
     let permission: PermissionState;
     try {
 
-      // permission = await (DeviceMotionEvent as any).requestPermission();
-      // if (permission !== 'granted') {
-      //   console.log('Request to access the device orientation was rejected');
-      //   return false;
-      // }
+      permission = await (DeviceMotionEvent as any).requestPermission();
+      if (permission !== 'granted') {
+        console.log('Request to access the device orientation was rejected');
+        return false;
+      }
 
       permission = await (DeviceOrientationEvent as any).requestPermission();
       if (permission !== 'granted') {

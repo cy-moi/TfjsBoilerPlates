@@ -8,6 +8,28 @@ function downloadObjectAsJson(exportObj: any, exportName: string){
   downloadAnchorNode.remove();
 }
 
+const askPermissionForDeviceMOtion = async() => {
+  if ((DeviceOrientationEvent as any).requestPermission
+    && typeof (DeviceMotionEvent as any).requestPermission === 'function') {
+    // Handle iOS 13+ devices.
+    let permission: PermissionState;
+    try {
+
+      permission = await (DeviceMotionEvent as any).requestPermission();
+      if (permission !== 'granted') {
+        console.log('Request to access the device orientation was rejected');
+        return false;
+      }
+
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
+
+}
+
 export {
-  downloadObjectAsJson
+  downloadObjectAsJson,
+  askPermissionForDeviceMOtion
 }

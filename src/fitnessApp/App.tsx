@@ -5,6 +5,7 @@ import React, { useEffect, useState }from 'react';
 // import { HandWorker } from '../worker/handpose.worker';
 // import * as Comlink from 'comlink';
 import CollectPage from './CollectPage';
+import TestPage from './TestPage';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
   return (
     <>
       <CollectPage />
+      <TestPage />
     </>
     )
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as fitClasses from "./classes.json";
 import { downloadObjectAsJson } from "./helpers";
 import './styles.css'
-// import { trainModel } from "./train";
+import { trainModel } from "./trainModel";
 
 function CollectPage() {
   const [collect, setCollect] = useState<string>(undefined);
@@ -12,7 +12,9 @@ function CollectPage() {
   const [data, setData] = useState<Array<[]>>([]);
   const [start, setStart] = useState(null);
 
-  // useEffect(() => {trainModel()}, [])
+  // useEffect(() => {
+  //   console.log("training");
+  //   trainModel()}, [])
 
   const addEventListeners = async() => {
     if ((DeviceOrientationEvent as any).requestPermission

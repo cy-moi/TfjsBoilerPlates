@@ -10,7 +10,7 @@ export default function TestPage() {
   const BUFFER_SIZE = 275;
 
   const [prediction, setPred] = useState<string>(undefined);
-  const [timer, setTimer] = useState<number>(0);
+  // const [timer, setTimer] = useState<number>(0);
   const [buffer, setBuffer] = useState([]);
   const [allbuffer, setAll] = useState([]);
   const [result, setRes] = useState(0)
@@ -62,7 +62,7 @@ export default function TestPage() {
           setTemp(prediction);
         } catch(err) {
           console.log(err)
-          setPred('error')
+          setPred(err)
         }
     }
 

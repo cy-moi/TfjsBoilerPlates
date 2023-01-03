@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo} from "react";
 import * as Comlink from 'comlink';
 import { MyModelWorker } from "src/worker/fitness.worker";
 import './styles.css'
@@ -19,9 +19,9 @@ export default function TestPage() {
 
   const [temp, setTemp] = useState([]);
 
-  const worker : Comlink.Remote<MyModelWorker> = Comlink.wrap(
+  const worker : Comlink.Remote<MyModelWorker> = useMemo(() => Comlink.wrap(
     new Worker(new URL(`../worker/fitness.worker.ts`, import.meta.url))
-  );
+  ), []);
 
   useEffect(() => {
 
@@ -31,10 +31,12 @@ export default function TestPage() {
       const url = window.location.href.substring(0, ind - 1)
       setRes(url);
 
-      const mymodel = await tf.loadLayersModel(url + '/assets/my-model.json');
+      worker.init(url);
+
+      // const mymodel = await tf.loadLayersModel(url + '/assets/my-model.json');
   
-      setModel(mymodel)
-      console.log("ready");
+      // setModel(mymodel)
+      // console.log("ready");
 
     })()
 
@@ -58,9 +60,9 @@ export default function TestPage() {
       // if(ready) {
         try{
           console.log("predict")
-          const tensor = processData(allbuffer)
-          const res = await model.predict(tensor);
-          setPred(res.rankType);
+          // const tensor = processData(allbuffer)
+          const res = await worker.estimate(allbuffer);
+          setPred(res);
           console.log(res);
           setTimer(Date.now());
         } catch(err) {
@@ -70,6 +72,8 @@ export default function TestPage() {
     }
 
     predict();
+    // setBuffer({"motion": [0,1,0,1,0,1]});
+
 
   }, [buffer])
 

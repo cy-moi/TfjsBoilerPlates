@@ -77,6 +77,6 @@ export default function TestPage() {
 
   return (<>
   <div>{prediction}</div>
-  <div>{temp}</div>
+  {/* <div>{temp}</div> */}
   </>)
 }

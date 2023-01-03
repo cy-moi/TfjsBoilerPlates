@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "use tfjs to classify space objects in scifi",
   "main": "index.js",
+  "proxy": "http://github.com/",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js --hot",
     "build": "yarn patch-package; webpack --config webpack.config.js",

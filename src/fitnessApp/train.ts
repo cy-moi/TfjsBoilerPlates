@@ -1,32 +1,7 @@
-"use strict";
-import * as tf from '@tensorflow/tfjs';
-const classes = require('./classes.json');
+const tf = require("@tensorflow/tfjs");
+const classes = require("./classes.json");
 
-export const processData = (el: any[]) => {
-  el = el.map((d) => Object.values(d));
-  let temp = [];
-  // console.log(el, "line 8")
-
-  for(let d of el) temp = [...temp, ...d];
-  el = []
-  for (let d of temp) el = [...el, ...d]
-  // console.log(el)
-
-  let len = 1656 - el.length;      
-  if(el.length < 1656) {
-    let i = 0;
-    
-    while( i < len) {
-      el.push(0)
-      i++;
-    }
-  }
-
-  console.log(tf.tensor([el]).shape)
-  return tf.tensor([el]);
-}
-
-export const trainModel = async () => {
+(async () => {
   let pfitdata = [];
   let plabels = [];
   let ind = 0;
@@ -61,6 +36,7 @@ export const trainModel = async () => {
 
   const fitdata = tf.tensor(pfitdata);
   const labels = tf.tensor(plabels);
+  fitdata.print();
 
   console.log(fitdata.shape, labels.shape)
 
@@ -118,6 +94,8 @@ export const trainModel = async () => {
   // await model.save('downloads://my-model');
 
   // // Predict 3 random samples.
-  // const prediction = model.predict(tf.randomNormal([3, 784]));
+  // tf.randomNormal([1656]).print()
+  // console.log("prediction")
+  // const prediction = model.predict( tf.randomNormal([1, 1656]));
   // prediction.print();
-}
+})()

@@ -3,6 +3,7 @@ import * as Comlink from 'comlink';
 import { MyModelWorker } from "src/worker/fitness.worker";
 import './styles.css'
 import { askPermissionForDeviceMOtion } from "./helpers";
+import * as tf from '@tensorflow/tfjs';
 import { processData } from "./trainModel";
 
 export default function TestPage() {
@@ -13,7 +14,8 @@ export default function TestPage() {
   const [timer, setTimer] = useState<number>(0);
   const [buffer, setBuffer] = useState([]);
   const [allbuffer, setAll] = useState([]);
-  const [result, setRes] = useState({})
+  const [result, setRes] = useState("")
+  const [model, setModel] = useState(null);
 
   const [temp, setTemp] = useState([]);
 
@@ -22,10 +24,24 @@ export default function TestPage() {
   );
 
   useEffect(() => {
+
     (async() => {
+      console.log("initiating...")
       const ind = window.location.href.indexOf("fitness");
-      await worker.init(window.location.href.substring(0, ind - 1));
-      setTimer(1111)
+      const url = window.location.href.substring(0, ind - 1)
+      setRes(url);
+
+      const mymodel = await tf.loadLayersModel(url + '/assets/my-model.json');
+  
+      setModel(mymodel)
+      console.log("ready");
+
+    //   await worker.init(window.location.href.substring(0, ind - 1));
+    //   console.log(worker.ready());
+    //   setTimer(1111)
+    //   const test = require('./test.json');
+    //   setAll(test)
+    //   setBuffer([Math.random])
     })()
 
     askPermissionForDeviceMOtion();
@@ -44,29 +60,22 @@ export default function TestPage() {
     }
 
     const predict = async() => {
-      if(worker.ready()) {
+
+      // if(ready) {
         try{
           console.log("predict")
-          const buf = processData(allbuffer);
-          // console.log(buf);
-          setTemp(buf);
-          const res = await worker.estimate(buf);
-          setPred(res);
+          const tensor = processData(allbuffer)
+          const res = await model.predict(tensor);
+          setPred(res.rankType);
           console.log(res);
           setTimer(Date.now());
         } catch(err) {
           console.log(err)
+          setPred('error')
         }
-
-      }
-      // animationFrameId = window.requestAnimationFrame(predict);
     }
 
     predict();
-
-    // return () => {
-    //   window.cancelAnimationFrame(animationFrameId);
-    // }
 
   }, [buffer])
 
@@ -85,8 +94,14 @@ export default function TestPage() {
 
 
   return (<>
+  <button onClick={() => {
+    const test = require('./test.json');
+    setAll(test)
+    setBuffer([Math.random])
+  }}>use demo data</button>
   <div>{prediction}</div>
-  
+  <div>{result}</div>
+
   <div>{timer}</div>
   </>)
 }

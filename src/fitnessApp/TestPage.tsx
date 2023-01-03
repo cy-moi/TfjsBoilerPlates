@@ -16,7 +16,7 @@ export default function TestPage() {
   const [result, setRes] = useState(0)
   const [type, setType] = useState(0);
 
-  const [temp, setTemp] = useState([]);
+  const [temp, setTemp] = useState(0);
 
   const worker : Comlink.Remote<MyModelWorker> = useMemo(() => Comlink.wrap(
     new Worker(new URL(`../worker/fitness.worker.ts`, import.meta.url))
@@ -58,7 +58,8 @@ export default function TestPage() {
           // const tensor = processData(allbuffer)
           const res = await worker.estimate(allbuffer);
           setPred(res[0].indexOf(Math.max(...res[0])));
-          if(prediction === type) setRes(result + 1);
+          if(prediction === type && prediction !== temp) setRes(result + 1);
+          setTemp(prediction);
         } catch(err) {
           console.log(err)
           setPred('error')
@@ -92,7 +93,7 @@ export default function TestPage() {
     setBuffer([Math.random])
   }}>use demo data</button> */}
   <div>{prediction}</div>
-  <div>DO {fitClasses[type]}</div>
+  <div>DO {Object.keys(fitClasses)[type]}</div>
   <div>{result}</div>
   </>)
 }

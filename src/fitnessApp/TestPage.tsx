@@ -35,8 +35,33 @@ export default function TestPage() {
 
       worker.init(url);
       
-      await askPermissionForDeviceMOtion();
-      window.addEventListener("devicemotion", handleMotionEvent);
+      if ((DeviceOrientationEvent as any).requestPermission
+        && typeof (DeviceMotionEvent as any).requestPermission === 'function') {
+        // Handle iOS 13+ devices.
+        let permission: PermissionState;
+        try {
+
+          permission = await (DeviceOrientationEvent as any).requestPermission();
+          if (permission !== 'granted') {
+            console.log('Request to access the device orientation was rejected');
+            return false;
+          }
+
+          permission = await (DeviceMotionEvent as any).requestPermission();
+          if (permission !== 'granted') {
+            console.log('Request to access the device orientation was rejected');
+            return false;
+          }
+
+        } catch (err) {
+          console.log(err);
+          return false;
+        }
+      }
+
+      // window.addEventListener('deviceorientation', handleOrientation, true);
+      window.addEventListener("devicemotion", handleMotionEvent, true);
+
     })()
 
   },[])

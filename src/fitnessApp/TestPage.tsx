@@ -25,6 +25,7 @@ export default function TestPage() {
     (async() => {
       const ind = window.location.href.indexOf("fitness");
       await worker.init(window.location.href.substring(0, ind - 1));
+      setTimer(1111)
     })()
 
     askPermissionForDeviceMOtion();

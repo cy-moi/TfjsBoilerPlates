@@ -7,7 +7,7 @@ import { processData } from "./trainModel";
 
 export default function TestPage() {
 
-  const BUFFER_SIZE = 15;
+  const BUFFER_SIZE = 150;
 
   const [prediction, setPred] = useState<string>(undefined);
   const [timer, setTimer] = useState<number>(0);
@@ -51,6 +51,7 @@ export default function TestPage() {
           const res = await worker.estimate(buf);
           setPred(res);
           console.log(res);
+          setTimer(Date.now());
         } catch(err) {
           console.log(err)
         }
@@ -83,6 +84,7 @@ export default function TestPage() {
 
   return (<>
   <div>{prediction}</div>
-  {/* <div>{temp}</div> */}
+  
+  <div>{timer}</div>
   </>)
 }

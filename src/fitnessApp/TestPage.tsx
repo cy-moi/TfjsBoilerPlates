@@ -39,13 +39,36 @@ export default function TestPage() {
 
   },[])
 
-  useEffect(() => {
-    (async() => {
-      await askPermissionForDeviceMOtion();
-      setLog("permission asked");
-      window.addEventListener('devicemotion', handleMotionEvent, true);
-    })()
-  }, [])
+  const addEventListeners = async() => {
+    if ((DeviceOrientationEvent as any).requestPermission
+      && typeof (DeviceMotionEvent as any).requestPermission === 'function') {
+      // Handle iOS 13+ devices.
+      let permission: PermissionState;
+      try {
+
+        permission = await (DeviceOrientationEvent as any).requestPermission();
+        if (permission !== 'granted') {
+          console.log('Request to access the device orientation was rejected');
+          return false;
+        }
+
+        permission = await (DeviceMotionEvent as any).requestPermission();
+        if (permission !== 'granted') {
+          console.log('Request to access the device orientation was rejected');
+          return false;
+        }
+
+      } catch (err) {
+        console.log(err);
+        return false;
+      }
+    }
+
+    // window.addEventListener('deviceorientation', handleOrientation, true);
+    window.addEventListener("devicemotion", handleMotionEvent, true);
+
+  }
+
 
 
   useEffect(() => {
@@ -98,10 +121,11 @@ export default function TestPage() {
 
 
   return (<>
-  <button onClick={() => {
+  <button onClick={async() => {
     // const test = require('./test.json');
     // setAll(test)
     setBuffer({"motion": [0,0,0,0,0,0]})
+    await addEventListeners();
   }}>use demo data</button>
   {/* <div>{temp}</div> */}
   <div>{log}</div>

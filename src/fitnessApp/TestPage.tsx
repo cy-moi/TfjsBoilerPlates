@@ -23,7 +23,8 @@ export default function TestPage() {
 
   useEffect(() => {
     (async() => {
-      await worker.init(window.location.href.substring(0, window.location.href.length - 8));
+      const ind = window.location.href.indexOf("fitness");
+      await worker.init(window.location.href.substring(0, ind - 1));
     })()
 
     askPermissionForDeviceMOtion();

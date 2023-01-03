@@ -20,9 +20,11 @@ const classes = require("./classes.json");
         let i = 0;
         
         while( i < len) {
-          temp.push(0)
+          temp.push(temp[i])
           i++;
         }
+      } else {
+        temp = temp.slice(0, 1656)
       }
 
       console.log(temp.length)
@@ -58,7 +60,7 @@ const classes = require("./classes.json");
       //   units: 150,
       //   activation: "relu",
       // }),
-      tf.layers.dense({ units: 3, activation: "softmax" }),
+      tf.layers.dense({ units: 4, activation: "softmax" }),
     ],
   });
 

@@ -7,7 +7,7 @@ import * as fitClasses from './classes.json';
 
 export default function TestPage() {
 
-  const BUFFER_SIZE = 150;
+  const BUFFER_SIZE = 275;
 
   const [prediction, setPred] = useState<string>(undefined);
   const [timer, setTimer] = useState<number>(0);
@@ -67,8 +67,6 @@ export default function TestPage() {
     }
 
     predict();
-    // setBuffer({"motion": [0,1,0,1,0,1]});
-
 
   }, [buffer])
 
@@ -92,6 +90,7 @@ export default function TestPage() {
     setAll(test)
     setBuffer([Math.random])
   }}>use demo data</button> */}
+  {/* <div>{temp}</div> */}
   <div>{prediction}</div>
   <div>DO {Object.keys(fitClasses)[type]}</div>
   <div>{result}</div>

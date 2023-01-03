@@ -3,9 +3,10 @@ import * as tf from '@tensorflow/tfjs';
 const classes = require('./classes.json');
 
 export const processData = (el: any[]) => {
+  console.log(el, " process data")
+
   el = el.map((d) => Object.values(d));
   let temp = [];
-  // console.log(el, "line 8")
 
   for(let d of el) temp = [...temp, ...d];
   el = []
@@ -18,6 +19,7 @@ export const processData = (el: any[]) => {
     
     while( i < len) {
       el.push(0)
+
       i++;
     }
   }
@@ -30,7 +32,6 @@ export const trainModel = async () => {
   let pfitdata = [];
   let plabels = [];
   let ind = 0;
-
 
   for (let cl of Object.keys(classes)) {
     console.log(cl);
@@ -45,9 +46,11 @@ export const trainModel = async () => {
         let i = 0;
         
         while( i < len) {
-          temp.push(0)
+          temp.push(temp[i])
           i++;
         }
+      } else {
+        temp = temp.slice(0, 1656)
       }
 
       console.log(temp.length)
@@ -82,7 +85,7 @@ export const trainModel = async () => {
       //   units: 150,
       //   activation: "relu",
       // }),
-      tf.layers.dense({ units: 3, activation: "softmax" }),
+      tf.layers.dense({ units: 4, activation: "softmax" }),
     ],
   });
 
@@ -115,7 +118,7 @@ export const trainModel = async () => {
        console.log('Final accuracy', info.history.acc);
     });
 
-  // await model.save('downloads://my-model');
+  await model.save('downloads://my-model');
 
   // // Predict 3 random samples.
   // const prediction = model.predict(tf.randomNormal([3, 784]));

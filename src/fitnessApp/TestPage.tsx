@@ -89,9 +89,9 @@ export default function TestPage() {
 
   return (<>
   <button onClick={() => {
-    const test = require('./test.json');
-    setAll(test)
-    setBuffer([Math.random])
+    // const test = require('./test.json');
+    // setAll(test)
+    setBuffer({"motion": [0,0,0,0,0,0]})
   }}>use demo data</button>
   {/* <div>{temp}</div> */}
   <div>{prediction}</div>

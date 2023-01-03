@@ -5,3 +5,7 @@ button {
 .submit {
   background-color: green;
 }
+
+.restart {
+  background-color: red;
+}

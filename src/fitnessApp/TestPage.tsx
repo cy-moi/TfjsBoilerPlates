@@ -62,8 +62,8 @@ export default function TestPage() {
           console.log("predict")
           // const tensor = processData(allbuffer)
           const res = await worker.estimate(allbuffer);
-          setPred(res);
-          console.log(res);
+          setPred(res[0].indexOf(Math.max(...res[0])));
+          console.log(res[0].indexOf(Math.max(...res[0])));
           setTimer(Date.now());
         } catch(err) {
           console.log(err)

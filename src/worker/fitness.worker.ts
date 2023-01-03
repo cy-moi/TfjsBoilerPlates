@@ -29,8 +29,8 @@ export class MyModelWorker {
     console.log(this.model);
     if(this.model === undefined) return null;
     const predictions = await this.model.predict(tensor);
-    console.log(predictions.rankType)
-    return predictions.rankType
+    predictions.print()
+    return predictions.array()
   }
 }
 

@@ -33,38 +33,19 @@ export default function TestPage() {
       const ind = window.location.href.indexOf("fitness");
       const url = window.location.href.substring(0, ind - 1)
 
-      worker.init(url);
-      
-      if ((DeviceOrientationEvent as any).requestPermission
-        && typeof (DeviceMotionEvent as any).requestPermission === 'function') {
-        // Handle iOS 13+ devices.
-        let permission: PermissionState;
-        try {
-
-          permission = await (DeviceOrientationEvent as any).requestPermission();
-          if (permission !== 'granted') {
-            console.log('Request to access the device orientation was rejected');
-            return false;
-          }
-
-          permission = await (DeviceMotionEvent as any).requestPermission();
-          if (permission !== 'granted') {
-            console.log('Request to access the device orientation was rejected');
-            return false;
-          }
-
-        } catch (err) {
-          console.log(err);
-          return false;
-        }
-      }
-
-      // window.addEventListener('deviceorientation', handleOrientation, true);
-      window.addEventListener("devicemotion", handleMotionEvent, true);
+      await worker.init(url);
 
     })()
 
   },[])
+
+  useEffect(() => {
+    (async() => {
+      await askPermissionForDeviceMOtion();
+      setLog("permission asked");
+      window.addEventListener('devicemotion', handleMotionEvent, true);
+    })()
+  }, [])
 
 
   useEffect(() => {

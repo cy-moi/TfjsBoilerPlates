@@ -36,12 +36,6 @@ export default function TestPage() {
       setModel(mymodel)
       console.log("ready");
 
-    //   await worker.init(window.location.href.substring(0, ind - 1));
-    //   console.log(worker.ready());
-    //   setTimer(1111)
-    //   const test = require('./test.json');
-    //   setAll(test)
-    //   setBuffer([Math.random])
     })()
 
     askPermissionForDeviceMOtion();
@@ -94,11 +88,11 @@ export default function TestPage() {
 
 
   return (<>
-  <button onClick={() => {
+  {/* <button onClick={() => {
     const test = require('./test.json');
     setAll(test)
     setBuffer([Math.random])
-  }}>use demo data</button>
+  }}>use demo data</button> */}
   <div>{prediction}</div>
   <div>{result}</div>
 

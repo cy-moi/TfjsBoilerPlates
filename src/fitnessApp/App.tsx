@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <CollectPage />
-      <TestPage />
+      {/* <TestPage /> */}
     </>
     )
 }

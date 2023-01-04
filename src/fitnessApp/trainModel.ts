@@ -18,7 +18,7 @@ export const processData = (el: any[]) => {
     let i = 0;
     
     while( i < len) {
-      el.push(0)
+      el.push(el[0])
 
       i++;
     }
@@ -85,7 +85,7 @@ export const trainModel = async () => {
       //   units: 150,
       //   activation: "relu",
       // }),
-      tf.layers.dense({ units: 4, activation: "softmax" }),
+      tf.layers.dense({ units: 3, activation: "softmax" }),
     ],
   });
 

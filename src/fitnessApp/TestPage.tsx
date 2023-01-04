@@ -26,7 +26,7 @@ export default function TestPage() {
 
   useEffect(() => {
 
-    setType(Math.round(Math.random() * 3));
+    setType(Math.round(Math.random() * 2));
 
     (async() => {
       console.log("initiating...")
@@ -92,7 +92,7 @@ export default function TestPage() {
           if(!res) setPred("no prediction")
           else {
             setPred(res[0].indexOf(Math.max(...res[0])));
-            if(prediction === type && prediction !== temp) setRes(result + 1);
+            if(prediction-1 === type && prediction !== temp) setRes(result + 1);
             setTemp(prediction);
           }
         } catch(err) {
@@ -130,6 +130,7 @@ export default function TestPage() {
   {/* <div>{temp}</div> */}
   {/* <div>{log}</div> */}
   <div>{prediction}</div>
+  <div>{Object.keys(fitClasses)} </div>
   <div>DO {Object.keys(fitClasses)[type]} Current Buffer Size {allbuffer.length}</div>
   <div>{result}</div>
   </>)

@@ -98,7 +98,7 @@ export default function TestPage() {
       setAll([...allbuffer, buffer]);
     }
 
-    const timer = setTimeout( () => predict(), 200);
+    const timer = setTimeout( () => predict(), 50);
 
     return () => clearTimeout(timer);
 

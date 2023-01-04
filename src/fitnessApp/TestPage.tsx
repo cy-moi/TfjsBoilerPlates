@@ -18,7 +18,7 @@ export default function TestPage() {
 
   const [temp, setTemp] = useState(0);
 
-  const [log, setLog] = useState([]);
+  // const [log, setLog] = useState([]);
 
   const worker : Comlink.Remote<MyModelWorker> = useMemo(() => Comlink.wrap(
     new Worker(new URL(`../worker/fitness.worker.ts`, import.meta.url))
@@ -73,7 +73,7 @@ export default function TestPage() {
 
   useEffect(() => {
     // let animationFrameId: number;
-    log.push("buffer value changed")
+    // log.push("buffer value changed")
 
 
     if(allbuffer.length < BUFFER_SIZE) setAll([...allbuffer, buffer])
@@ -107,7 +107,7 @@ export default function TestPage() {
 
 
   const handleMotionEvent = (event : DeviceMotionEvent) => {
-    log.push("motion event fired")
+    // log.push("motion event fired")
     const x = event.accelerationIncludingGravity.x;
     const y = event.accelerationIncludingGravity.y;
     const z = event.accelerationIncludingGravity.z;
@@ -116,7 +116,7 @@ export default function TestPage() {
     const leftToRight = event.rotationRate.gamma; // gamma: left to right
     const frontToBack = event.rotationRate.beta; // beta: front back motion
 
-    setTimeout(() =>  setBuffer({"motion": [x, y, z, rotateDegrees, leftToRight, frontToBack]}), 500);
+    setBuffer({"motion": [x, y, z, rotateDegrees, leftToRight, frontToBack]});
   };
 
 
@@ -128,7 +128,7 @@ export default function TestPage() {
     await addEventListeners();
   }}>use demo data</button>
   {/* <div>{temp}</div> */}
-  <div>{log}</div>
+  {/* <div>{log}</div> */}
   <div>{prediction}</div>
   <div>DO {Object.keys(fitClasses)[type]} Current Buffer Size {allbuffer.length}</div>
   <div>{result}</div>

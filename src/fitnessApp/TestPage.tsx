@@ -7,7 +7,7 @@ import * as fitClasses from './classes.json';
 
 export default function TestPage() {
 
-  const BUFFER_SIZE = 200;
+  const BUFFER_SIZE = 275;
 
   const [prediction, setPred] = useState<string>(undefined);
   // const [timer, setTimer] = useState<number>(0);

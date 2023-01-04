@@ -31,17 +31,19 @@ button {
   color: #131313;
   border-radius: 5%;
   border-style: none;
-  width: 70%;
+  padding: 15%;
+  /* width: 70%; */
   height: 60%;
   margin-top: 10%;
   margin-left: 15%;
 }
 
-.activity:hover{
+.activity:hover, .activity:active{
   background-color: green;
 }
 
 h2 {
+  padding: 5%;
   font-weight: bold;
   color: #EFEFEF;
 }

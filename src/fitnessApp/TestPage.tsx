@@ -68,6 +68,26 @@ export default function TestPage() {
     window.addEventListener("devicemotion", handleMotionEvent, true);
   };
 
+
+  const predict = async () => {
+    // if(ready) {
+    try {
+      console.log("predict");
+      // const tensor = processData(allbuffer)
+      const res = await worker.estimate(allbuffer);
+      if (!res) setPred("no prediction");
+      else {
+        setPred(res[0].indexOf(Math.max(...res[0])));
+        // if(prediction != 0) setPred(prediction - 1);
+        if (prediction === type && prediction !== temp) setRes(result + 1);
+        setTemp(prediction);
+      }
+    } catch (err) {
+      console.log(err);
+      setPred(err.message);
+    }
+  };
+
   useEffect(() => {
     // let animationFrameId: number;
     // log.push("buffer value changed")
@@ -78,26 +98,10 @@ export default function TestPage() {
       setAll([...allbuffer, buffer]);
     }
 
-    const predict = async () => {
-      // if(ready) {
-      try {
-        console.log("predict");
-        // const tensor = processData(allbuffer)
-        const res = await worker.estimate(allbuffer);
-        if (!res) setPred("no prediction");
-        else {
-          setPred(res[0].indexOf(Math.max(...res[0])));
-          // if(prediction != 0) setPred(prediction - 1);
-          if (prediction === type && prediction !== temp) setRes(result + 1);
-          setTemp(prediction);
-        }
-      } catch (err) {
-        console.log(err);
-        setPred(err.message);
-      }
-    };
+    const timer = setTimeout( () => predict(), 200);
 
-    predict();
+    return () => clearTimeout(timer);
+
   }, [buffer]);
 
   const handleMotionEvent = (event: DeviceMotionEvent) => {

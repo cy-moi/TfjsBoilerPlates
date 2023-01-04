@@ -98,9 +98,11 @@ export default function TestPage() {
       setAll([...allbuffer, buffer]);
     }
 
-    const timer = setTimeout( async() => await predict(), 200);
+    (async() => await predict())()
 
-    return () => clearTimeout(timer);
+    // const timer = setTimeout( async() => await predict(), 200);
+
+    // return () => clearTimeout(timer);
 
   }, [buffer]);
 

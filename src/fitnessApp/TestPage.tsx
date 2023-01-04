@@ -12,7 +12,7 @@ export default function TestPage() {
   // const [timer, setTimer] = useState<number>(0);
   const [buffer, setBuffer] = useState([]);
   const [allbuffer, setAll] = useState([]);
-  const [result, setRes] = useState(0);
+  const [result, setRes] = useState("Start");
   const [type, setType] = useState(0);
 
   const [temp, setTemp] = useState(0);
@@ -132,6 +132,7 @@ export default function TestPage() {
         // setAll(test);
         // setBuffer({"motion": [0,0,0,0,0,0]})
         await addEventListeners();
+        setRes(0);
       }}>
         {Object.keys(fitClasses)[type]}
         <h1 className="counter">{result}</h1>

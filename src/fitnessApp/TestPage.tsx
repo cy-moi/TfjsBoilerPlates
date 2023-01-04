@@ -28,7 +28,7 @@ export default function TestPage() {
   );
 
   useEffect(() => {
-    setType(Math.round(Math.random() * 2));
+    setType(Math.round(Math.random() * 2 + 1));
 
     (async () => {
       console.log("initiating...");

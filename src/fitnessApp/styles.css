@@ -1,5 +1,16 @@
+body {
+  background-color: #131313;
+  width: 100%;
+  height: 100%;
+}
+
 button {
   padding: 5%
+}
+
+#container {
+  width: 100%;
+  height: 100%;
 }
 
 .submit {
@@ -8,4 +19,33 @@ button {
 
 .restart {
   background-color: red;
+}
+
+.activity {
+  background-color: greenyellow;
+  font-weight: bolder;
+  font-size: xx-large;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #131313;
+  border-radius: 5%;
+  border-style: none;
+  width: 70%;
+  height: 60%;
+  margin-top: 10%;
+  margin-left: 15%;
+}
+
+.activity:hover{
+  background-color: green;
+}
+
+h2 {
+  font-weight: bold;
+  color: #EFEFEF;
+}
+
+.counter {
+  font-size: 10vh;
 }

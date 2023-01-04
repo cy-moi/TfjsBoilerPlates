@@ -23,7 +23,7 @@ function App() {
 
   return (
     <>
-      <CollectPage />
+      {/* <CollectPage /> */}
       <TestPage />
     </>
     )

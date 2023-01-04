@@ -1,7 +1,13 @@
 {
-  "stretches": {},
-  "squat":{},
-  "T-raises": {},
   "still": {},
+  "stretches": {
+    "text": "Stretch left side. Hold your phone in the stretching hand."
+  },
+  "squat":{
+    "text": "Hold your phone in hand."
+  },
+  "T-raises": {
+    "text": "Hold your phone in the raising hand."
+  },
   "shake": {}
 }

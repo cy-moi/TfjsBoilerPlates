@@ -31,11 +31,11 @@ button {
   color: #131313;
   border-radius: 5%;
   border-style: none;
-  padding: 15%;
+  padding: 25%;
   /* width: 70%; */
   height: 60%;
   margin-top: 10%;
-  margin-left: 15%;
+  margin-left: 5%;
 }
 
 .activity:hover, .activity:active{
@@ -49,5 +49,6 @@ h2 {
 }
 
 .counter {
+  width: 20vh;
   font-size: 10vh;
 }

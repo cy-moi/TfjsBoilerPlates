@@ -92,7 +92,8 @@ export default function TestPage() {
           if(!res) setPred("no prediction")
           else {
             setPred(res[0].indexOf(Math.max(...res[0])));
-            if(prediction-1 === type && prediction !== temp) setRes(result + 1);
+            // if(prediction != 0) setPred(prediction - 1);
+            if(prediction === type && prediction !== temp) setRes(result + 1);
             setTemp(prediction);
           }
         } catch(err) {

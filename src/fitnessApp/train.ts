@@ -60,7 +60,7 @@ const classes = require("./classes.json");
       //   units: 150,
       //   activation: "relu",
       // }),
-      tf.layers.dense({ units: 4, activation: "softmax" }),
+      tf.layers.dense({ units: 5, activation: "softmax" }),
     ],
   });
 
@@ -85,7 +85,7 @@ const classes = require("./classes.json");
   // Train for 5 epochs with batch size of 32.
   model
     .fit(fitdata, labels, {
-      epochs: 20,
+      epochs: 30,
       // batchSize: 2,
       callbacks: { onBatchEnd },
     })

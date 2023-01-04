@@ -85,7 +85,7 @@ export const trainModel = async () => {
       //   units: 150,
       //   activation: "relu",
       // }),
-      tf.layers.dense({ units: 3, activation: "softmax" }),
+      tf.layers.dense({ units: 5, activation: "softmax" }),
     ],
   });
 
@@ -110,7 +110,7 @@ export const trainModel = async () => {
   // Train for 5 epochs with batch size of 32.
   model
     .fit(fitdata, labels, {
-      epochs: 20,
+      epochs: 25,
       // batchSize: 2,
       callbacks: { onBatchEnd },
     })

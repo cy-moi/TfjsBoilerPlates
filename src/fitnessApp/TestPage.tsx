@@ -98,7 +98,7 @@ export default function TestPage() {
       setAll([...allbuffer, buffer]);
     }
 
-    const timer = setTimeout( () => predict(), 50);
+    const timer = setTimeout( async() => await predict(), 200);
 
     return () => clearTimeout(timer);
 
@@ -128,9 +128,9 @@ export default function TestPage() {
       {/* <div>{temp}</div> */}
       {/* <div>{log}</div> */}
       <button className="activity" onClick={async() => {
-        // const test = require('./test.json');
-        // setAll(test);
-        // setBuffer({"motion": [0,0,0,0,0,0]})
+        const test = require('./test.json');
+        setAll(test);
+        setBuffer({"motion": [0,0,0,0,0,0]})
         await addEventListeners();
         setRes(0);
       }}>

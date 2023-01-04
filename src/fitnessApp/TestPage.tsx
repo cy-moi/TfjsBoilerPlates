@@ -128,9 +128,6 @@ export default function TestPage() {
       {/* <div>{temp}</div> */}
       {/* <div>{log}</div> */}
       <button className="activity" onClick={async() => {
-        const test = require('./test.json');
-        setAll(test);
-        setBuffer({"motion": [0,0,0,0,0,0]})
         await addEventListeners();
         setRes(0);
       }}>

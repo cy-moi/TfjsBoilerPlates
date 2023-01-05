@@ -124,7 +124,7 @@ export const trainModel = async (surface) => {
   //   tfvis.show.history(surface, info, ['loss', 'acc'])
   // });
 
-  // await model.save('downloads://my-model');
+  await model.save('downloads://my-model');
 
   // // Predict 3 random samples.
   // const prediction = model.predict(tf.randomNormal([3, 784]));

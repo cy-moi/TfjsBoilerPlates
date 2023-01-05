@@ -5,7 +5,10 @@ body {
 }
 
 button {
-  padding: 5%
+  padding: 5%;
+  color: #EFEFEF;
+  background-color: grey;
+
 }
 
 #container {

@@ -1,6 +1,6 @@
 "use strict";
 import * as tf from "@tensorflow/tfjs";
-import * as tfvis from '@tensorflow/tfjs-vis';
+import * as tfvis from "@tensorflow/tfjs-vis";
 
 const classes = require("./classes.json");
 
@@ -38,11 +38,13 @@ export const trainModel = async (surface) => {
   for (let cl of Object.keys(classes)) {
     // console.log(cl);
     classes[cl] =
-      localStorage.getItem(cl) === null ? [[]] : localStorage.getItem(cl);
+      localStorage.getItem(cl) === null
+        ? require(`./data/${cl}_washed.json`)
+        : localStorage.getItem(cl);
     for (let el of classes[cl]) {
       let temp = [];
 
-      if(el.length < 1) {
+      if (el.length < 1) {
         console.log("no data for class ", cl);
         temp = el;
       }

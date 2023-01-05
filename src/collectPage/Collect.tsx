@@ -136,9 +136,11 @@ function CollectPage() {
               End and Save Data
             </button>
           </div>
-          <button onClick={() => trainModel(surface)} className="submit">train model</button>
         </div>
       )}
+      
+      <button onClick={() => trainModel(surface)} className="submit">train model</button>
+
     </>
   );
 }

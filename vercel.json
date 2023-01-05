@@ -3,6 +3,10 @@
     {
       "source": "/fitness",
       "destination":"/fitness.html"
+    },
+    {
+      "source": "/collect",
+      "destination":"/collect.html"
     }
   ]
 }

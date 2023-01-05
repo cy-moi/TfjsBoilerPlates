@@ -14,11 +14,7 @@ function App() {
     {
       path: "/fitness",
       element: <TestPage />,
-    },
-    {
-      path: "/fitness/collect",
-      element: <CollectPage />,
-    },
+    }
   ]);
 
   return (

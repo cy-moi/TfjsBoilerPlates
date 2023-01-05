@@ -50,6 +50,11 @@ h2 {
   font-weight: bold;
   color: #EFEFEF;
 }
+h3 {
+  padding: 2%;
+  font-weight: bold;
+  color: #EFEFEF;
+}
 
 .counter {
   width: 20vh;

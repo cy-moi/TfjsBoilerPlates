@@ -104,7 +104,7 @@ function CollectPage() {
     else {
       window.removeEventListener('deviceorientation', handleOrientation);
       window.removeEventListener('devicemotion', handleMotionEvent);
-      // downloadObjectAsJson(data, `${collect}`);
+      downloadObjectAsJson(data, `${collect}`);
       saveDataToLocalStorage();
       setData([]);
     }
@@ -125,16 +125,16 @@ function CollectPage() {
 
       {collect && (
         <div>
-          <h2>Collected data: {counter}</h2>
-          <br></br>
-          <h2>Current data: {Object.values(buffer)}</h2>
-          <h2>Data will be downloaded and saved in localStorage</h2>
+          <h3>Collected data: {counter}</h3>
+          <h3>Current data: {Object.values(buffer)}</h3>
+          <h3>Data will be downloaded and saved in localStorage</h3>
           <div>
             <button onClick={deleteData} className="restart">Restart</button>
             <button onClick={registerData} className="submit">Register Data</button>
             <button onClick={() => handleClickClass(undefined, "end")}>
               End and Save Data
             </button>
+            <button>upload data</button>
           </div>
         </div>
       )}

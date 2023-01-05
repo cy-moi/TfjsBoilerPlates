@@ -1,6 +1,32 @@
 const tf = require("@tensorflow/tfjs");
 const classes = require("./classes.json");
 
+const processData = (el) => {
+  // console.log(el, " process data")
+
+  el = el.map((d) => Object.values(d));
+  let temp = [];
+
+  for(let d of el) temp = [...temp, ...d];
+  el = []
+  for (let d of temp) el = [...el, ...d]
+  // console.log(el)
+
+  let len = 1656 - el.length;      
+  if(el.length < 1656) {
+    let i = 0;
+    
+    while( i < len) {
+      el.push(el[0])
+
+      i++;
+    }
+  }
+
+  console.log(tf.tensor([el]).shape)
+  return tf.tensor([el]);
+}
+
 (async () => {
   let pfitdata = [];
   let plabels = [];
@@ -60,6 +86,10 @@ const classes = require("./classes.json");
       //   units: 150,
       //   activation: "relu",
       // }),
+      tf.layers.dense({
+        units: 32,
+        activation: "relu",
+      }),
       tf.layers.dense({ units: 5, activation: "softmax" }),
     ],
   });
@@ -97,7 +127,16 @@ const classes = require("./classes.json");
 
   // // Predict 3 random samples.
   // tf.randomNormal([1656]).print()
-  // console.log("prediction")
-  // const prediction = model.predict( tf.randomNormal([1, 1656]));
-  // prediction.print();
+
+  // test is stretch
+  // test2 is t-raise
+  const test = require('./test.json');
+  const test2 = require('./test2.json');
+  const tensor = processData(test);
+  const tensor2 = processData(test2);
+  console.log("prediction")
+  const prediction = model.predict(tensor);
+  prediction.print();
+  const prediction2 = model.predict(tensor2);
+  prediction2.print();
 })()

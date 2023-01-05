@@ -13,15 +13,6 @@ module.exports = {
   devtool: 'inline-source-map',
   module: {
     rules: [
-      // {
-      //   test: /\.worker\.(js|ts)$/i,
-      //   use: [{
-      //     loader: 'comlink-loader',
-      //     options: {
-      //       singleton: true
-      //     }
-      //   }]
-      // },
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
@@ -53,6 +44,7 @@ module.exports = {
     compress: true,
     port: 9000,
     historyApiFallback: {
+      index: './src/index.html',
       rewrites: getApiFallbackRewrites(),
     },
   },

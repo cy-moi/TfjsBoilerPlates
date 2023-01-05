@@ -1,32 +1,31 @@
 
 import React, { useEffect, useState }from 'react';
-// import Canvas from '../components/Canvas';
-// import { isMobile, setupCamera } from '../utils';
-// import { HandWorker } from '../worker/handpose.worker';
-// import * as Comlink from 'comlink';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import CollectPage from './CollectPage';
 import TestPage from './TestPage';
 
 function App() {
 
 
-  // useEffect(() => {
-  //   async function initScene() {
-
-  //   }
-
-  //   initScene();
-
-  //   return () => {}
-
-  // }, [])
+  const router = createBrowserRouter([
+    {
+      path: "/fitness",
+      element: <TestPage />,
+    },
+    {
+      path: "/fitness/collect",
+      element: <CollectPage />,
+    },
+  ]);
 
   return (
-    <>
-      {/* <CollectPage /> */}
-      <TestPage />
-    </>
-    )
+    // <React.StrictMode>
+      <RouterProvider router={router} />
+    // </React.StrictMode>
+  )
 }
 
 export default App

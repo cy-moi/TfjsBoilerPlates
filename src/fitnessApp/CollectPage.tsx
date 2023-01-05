@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as fitClasses from "./classes.json";
+import fitClasses from "./classes.json";
 import { downloadObjectAsJson } from "./helpers";
 import './styles.css'
 import { trainModel } from "./trainModel";
@@ -110,16 +110,16 @@ function CollectPage() {
       {fitClasses &&
         Object.keys(fitClasses).map((value, index) => (
           <button onClick={() => handleClickClass(value, "start")} key={index}>
-            {value}
+            {value }
           </button>
         ))}
     </div>
 
       {collect && (
         <div>
-          Collected data: {counter}
+          <h2>Collected data: {counter}</h2>
           <br></br>
-          Current data: {Object.keys(buffer)}
+          <h2>Current data: {Object.values(buffer)}</h2>
           <div>
             <button onClick={deleteData} className="restart">Restart</button>
             <button onClick={registerData} className="submit">Register Data</button>

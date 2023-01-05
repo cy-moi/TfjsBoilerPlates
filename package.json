@@ -6,7 +6,7 @@
   "proxy": "http://github.com/",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js --hot",
-    "build": "yarn patch-package; webpack --config webpack.config.js",
+    "build": "yarn patch-package; webpack-dev-server --config webpack.config.js",
     "postinstall": "patch-package",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
